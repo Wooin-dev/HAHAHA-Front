@@ -61,6 +61,11 @@ function Create(props) {
 }
 
 function Update(props) {
+
+    const [title, setTitle] = useState(props.title);
+    const [hint, setHint] = useState(props.hint);
+
+
     return <article>
         <h2>Update</h2>
         <form onSubmit={e => {
@@ -69,8 +74,12 @@ function Update(props) {
             const hint = e.target.hint.value;
             props.onUpdate(title, hint);
         }}>
-            <p><input type="text" name="title" value={props.title}/></p>
-            <p><textarea name="hint" placeholder="힌트"/></p>
+            <p><input type="text" name="title" value={title} onChange={e => {
+                setTitle(e.target.value)
+            }}/></p>
+            <p><textarea name="hint" placeholder="힌트" value={hint} onChange={e => {
+                setHint(e.target.value);
+            }}/></p>
             <p><input type="submit" value="Update"/></p>
         </form>
     </article>
@@ -101,10 +110,27 @@ function App() {
             }
         }
         content = <Article title={title} hint={hint} answer={answer}></Article>
-        contextControl = <li><a href={"/update/" + id} onClick={e => {
-            e.preventDefault();
-            setMode('UPDATE');
-        }}>Update</a></li>
+        contextControl = <>
+            <li><a href={"/update/" + id} onClick={e => {
+                e.preventDefault();
+                setMode('UPDATE');
+            }}>Update</a>
+            </li>
+            <li>
+                <input type={"button"} value={'삭제하기'} onClick={()=>{
+                    const newQuizzes = [];
+                    for (let i=0; i<quizzes.length; i++) {
+                        if (quizzes[i].id !== id) {
+                            newQuizzes.push(quizzes[i]);
+                        }
+                    }
+                    setQuizzes(newQuizzes);
+                    setMode('WELCOME');
+                    console.log(quizzes)
+                }}/>
+            </li>
+        </>
+
     } else if (mode === 'CREATE') {
         content = <Create onCreate={(_title, _hint) => {
             const newQuiz = {id: nextId, title: _title, hint: _hint}
@@ -124,18 +150,30 @@ function App() {
                 break;
             }
         }
+        content = <Update title={title} hint={hint} onUpdate={(title, hint) => {
+            const newQuizzes = [...quizzes]
+            const updatedQuiz = {id: id, title: title, hint: hint}
 
-        <Update title={title} hint={hint} onUpdate={(title, hint)=> {
-
+            for (let i = 0; i < newQuizzes.length; i++) {
+                if (newQuizzes[i].id === id) {
+                    newQuizzes[i] = updatedQuiz;
+                    break;
+                }
+            }
+            setQuizzes(newQuizzes);
         }}/>
     }
 
+    console.log(quizzes)
 
     return (
         <div>
             <Header title={'HAHAHA'} onChangeMode={() => {
                 setMode('WELCOME')
             }}></Header>
+
+            <p>mode : {mode}</p>
+            <p>state id : {id}</p>
 
             <List quizzes={quizzes} onChangeMode={(_id) => {
                 setMode('READ')
@@ -147,6 +185,7 @@ function App() {
                 setMode('CREATE')
             }}>CREATE</a></li>
             {contextControl}
+
         </div>
     );
 }
