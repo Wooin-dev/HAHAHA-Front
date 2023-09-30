@@ -11,7 +11,7 @@ export default function QuizThumb(props) {
     }
 
     return (
-        <div className='quiz-container' onClick={onClickQuizItem}>
+        <div className='quiz-thumb-container' onClick={onClickQuizItem}>
             <div className='quiz-info'>
                 <span>Quiz. {props.id}</span>
                 <h3>{props.title}</h3>

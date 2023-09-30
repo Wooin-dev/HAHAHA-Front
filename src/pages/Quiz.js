@@ -1,6 +1,7 @@
 import React from "react";
 import {dummy} from "../quizDummy";
 import QuizThumb from "../components/QuizThumb";
+import QuizCreateButton from "../components/QuizCreateButton";
 
 export default function Quiz() {
     return (
@@ -14,6 +15,7 @@ export default function Quiz() {
                         )
                     })
                 }
+                <QuizCreateButton />
             </div>
 
 

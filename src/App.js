@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Mypage from "./pages/Mypage";
 import Rank from "./pages/Rank";
 import QuizSelect from "./pages/QuizSelect";
+import QuizCreate from "./pages/QuizCreate";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/quiz" element={<Quiz/>}/>
                     <Route path="/quiz/:id" element={<QuizSelect/>}/>
+                    <Route path="/quiz/create" element={<QuizCreate/>}/>
                     <Route path="/rank" element={<Rank/>}/>
                     <Route path="/my-page" element={<Mypage/>}/>
                     <Route path="/*" element={<NotFound/>}/>
