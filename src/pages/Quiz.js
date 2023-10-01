@@ -23,17 +23,18 @@ export default function Quiz() {
             <div>{JSON.stringify(quizzes)}</div>
             <div className='quiz-container'>
                 {
-                    quizzes.map((quiz)=>{
+                    quizzes.map((quiz) => {
                         return (
-                            <QuizThumb id={quiz['quizId']}
+                            <QuizThumb key={quiz['quizId']}
+                                       id={quiz['quizId']}
                                        question={quiz['question']}
                                        hint={quiz.hint}
                                        answer={quiz.answer}
-                                       description={quiz.description} />
+                                       description={quiz.description}/>
                         )
                     })
                 }
-                <QuizCreateButton />
+                <QuizCreateButton/>
             </div>
         </div>
     )

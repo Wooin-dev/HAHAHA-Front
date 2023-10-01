@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
 
 function QuizSelect() {
 
@@ -7,9 +8,8 @@ function QuizSelect() {
 
     const {id} = useParams();
     const {state} = useLocation();
-
     const answer = state.answer;
-    console.log(`정답 ${answer}`)
+
     const [answerIn, setAnswerIn] = useState('');
     const [showHint, setShowHint] = useState(false);
     const [solved, setSolved] = useState(false);
@@ -27,15 +27,15 @@ function QuizSelect() {
             alert('땡!')
         }
     }
-
-    const testclick = (msg) => alert(`hello, ${msg}`)
-
-    function goToModify() {
+    const goToModify = () => {
         navigate(`/quiz/modify/${id}`, {
             state: state
         })
     }
-
+    const deleteQuiz = () => {
+        axios.delete(`http://localhost:8080/api/quizzes/${id}`)
+        navigate('/quiz')
+    };
 
 
     return (
@@ -61,7 +61,8 @@ function QuizSelect() {
                     {solved&&<div>{state.description}</div>}
                 </div>
 
-                <button onClick={goToModify}>수정하기</button>
+                <button onClick={goToModify}>수정</button>
+                <button onClick={deleteQuiz}>삭제</button>
 
             </div>
         </div>
