@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import {dummy} from "../quizDummy";
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
-function QuizCreate(props) {
+function QuizModify(props) {
+
+    const {id} = useParams()
+
     return (
         <div className={'page-container'}>
-            <h2>Quiz Create</h2>
+            <h2>Quiz Modify</h2>
             <form onSubmit={e => {
                 e.preventDefault();
 
@@ -14,7 +18,7 @@ function QuizCreate(props) {
                 const answer = e.target.answer.value;
                 const description = e.target.description.value;
 
-                createQuizOnList(title, hint, answer, description);
+                modifyQuiz(id, title, hint, answer, description);
 
             }}>
                 <p><textarea name="title" placeholder="문제"/></p>
@@ -28,9 +32,9 @@ function QuizCreate(props) {
 }
 
 
-function createQuizOnList(_question, _hint, _answer, _description) {
+function modifyQuiz(_quizId, _question, _hint, _answer, _description) {
 
-    axios.post('http://localhost:8080/api/quizzes', {
+    axios.put(`http://localhost:8080/api/quizzes/${_quizId}`, {
         question: _question,
         hint: _hint,
         answer: _answer,
@@ -44,4 +48,4 @@ function createQuizOnList(_question, _hint, _answer, _description) {
 }
 
 
-export default QuizCreate;
+export default QuizModify;

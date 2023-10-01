@@ -9,15 +9,12 @@ function QuizCreateButton() {
         navigate(`/quiz/create`)
     }
 
-    const createQuiz = () => {
-        dummy.push()
-    }
+
 
     return (
         <div className={'quiz-create'} onClick={onClickQuizCreate}>
             quizCreate
             퀴즈 만들기
-            <button onClick={()=>createQuiz}/>
         </div>
     );
 }

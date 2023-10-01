@@ -1,29 +1,42 @@
 import React, {useState} from 'react';
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 function QuizSelect(props) {
+
+    const navigate = useNavigate();
 
     const {id} = useParams();
     const {state} = useLocation();
 
     const answer = state.answer;
+    console.log(`정답 ${answer}`)
     const [answerIn, setAnswerIn] = useState('');
     const [showHint, setShowHint] = useState(false);
+    const [solved, setSolved] = useState(false);
 
 
     const clickShowHint = () => {
         setShowHint(!showHint);
     }
 
-    const checkAnswer = (answerIn) => {
+    const checkAnswer = () => {
         if (answerIn === answer) {
-            alert('정답')
+            alert(`정답 ${answer}`)
+            setSolved(true);
         } else {
             alert('땡!')
         }
     }
 
     const testclick = (msg) => alert(`hello, ${msg}`)
+
+    function goToModify() {
+        navigate(`/quiz/modify/${id}`, {
+            state: props
+        })
+    }
+
+
 
     return (
         <div className='page-container'>
@@ -43,7 +56,12 @@ function QuizSelect(props) {
                        onChange={(e) => {
                     setAnswerIn(e.target.value)
                 }}/>
-                <button onClick={answerIn => checkAnswer(answerIn)}>정답확인</button>
+                <button onClick={checkAnswer}>정답확인</button>
+                <div className='quiz-description'>
+                    {showHint&&<div>{state.description}</div>}
+                </div>
+
+                <button onClick={goToModify}>수정하기</button>
 
             </div>
         </div>

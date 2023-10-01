@@ -19,6 +19,7 @@ function App() {
                     <Route path="/quiz" element={<Quiz/>}/>
                     <Route path="/quiz/:id" element={<QuizSelect/>}/>
                     <Route path="/quiz/create" element={<QuizCreate/>}/>
+                    <Route path="/quiz/modify/:id" element={<QuizCreate/>}/>
                     <Route path="/rank" element={<Rank/>}/>
                     <Route path="/my-page" element={<Mypage/>}/>
                     <Route path="/*" element={<NotFound/>}/>
