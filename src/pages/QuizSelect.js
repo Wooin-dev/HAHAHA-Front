@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
@@ -7,13 +7,21 @@ function QuizSelect() {
     const navigate = useNavigate();
 
     const {id} = useParams();
-    const {state} = useLocation();
-    const answer = state.answer;
+    const [quiz, setQuiz] = useState({});
+    const answer = quiz.answer;
 
     const [answerIn, setAnswerIn] = useState('');
     const [showHint, setShowHint] = useState(false);
     const [solved, setSolved] = useState(false);
 
+    //데이터 가져오기
+    useEffect(()=>{
+        axios.get(`http://localhost:8080/api/quizzes/${id}`).then(res => {
+            setQuiz(res.data)
+        }).catch(error => {
+            alert(error)
+        })
+    },[])
 
     const clickShowHint = () => {
         setShowHint(!showHint);
@@ -29,7 +37,7 @@ function QuizSelect() {
     }
     const goToModify = () => {
         navigate(`/quiz/modify/${id}`, {
-            state: state
+            state: quiz
         })
     }
     const deleteQuiz = () => {
@@ -42,11 +50,11 @@ function QuizSelect() {
         <div className='page-container'>
             <div className='quiz-select-container'>
                 <div className='quiz-id'>{id}</div>
-                <div className='quiz-title'>{state.question}</div>
+                <div className='quiz-title'>{quiz.question}</div>
                 <div className='show-hint' style={{display:"flex"}}>
                     <button onClick={clickShowHint}>힌트보기</button>
                     <div className='quiz-hint'>
-                        {showHint&&<div>{state.hint}</div>}
+                        {showHint&&<div>{quiz.hint}</div>}
                     </div>
                 </div>
             </div>
@@ -58,7 +66,7 @@ function QuizSelect() {
                 }}/>
                 <button onClick={checkAnswer}>정답확인</button>
                 <div className='quiz-description'>
-                    {solved&&<div>{state.description}</div>}
+                    {solved&&<div>{quiz.description}</div>}
                 </div>
 
                 <button onClick={goToModify}>수정</button>
