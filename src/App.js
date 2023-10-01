@@ -7,8 +7,10 @@ import Mypage from "./pages/Mypage";
 import Rank from "./pages/Rank";
 import QuizSelect from "./pages/QuizSelect";
 import QuizCreate from "./pages/QuizCreate";
+import QuizModify from "./pages/QuizModify";
 
 function App() {
+
     return (
         <div className='root-wrap'>
             <BrowserRouter>
@@ -19,7 +21,7 @@ function App() {
                     <Route path="/quiz" element={<Quiz/>}/>
                     <Route path="/quiz/:id" element={<QuizSelect/>}/>
                     <Route path="/quiz/create" element={<QuizCreate/>}/>
-                    <Route path="/quiz/modify/:id" element={<QuizCreate/>}/>
+                    <Route path="/quiz/modify/:id" element={<QuizModify/>}/>
                     <Route path="/rank" element={<Rank/>}/>
                     <Route path="/my-page" element={<Mypage/>}/>
                     <Route path="/*" element={<NotFound/>}/>

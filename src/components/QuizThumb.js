@@ -14,9 +14,7 @@ export default function QuizThumb(props) {
         <div className='quiz-thumb-container' onClick={onClickQuizItem}>
             <div className='quiz-info'>
                 <span>Quiz. {props.id}</span>
-                <h3>{props.title}</h3>
-                <br/>힌트 긁어보기⬇
-                <h5>{props.hint}</h5>
+                <h3>{props.question}</h3>
             </div>
         </div>
     )

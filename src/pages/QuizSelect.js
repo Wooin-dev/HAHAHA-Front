@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
-function QuizSelect(props) {
+function QuizSelect() {
 
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function QuizSelect(props) {
 
     function goToModify() {
         navigate(`/quiz/modify/${id}`, {
-            state: props
+            state: state
         })
     }
 
@@ -42,7 +42,7 @@ function QuizSelect(props) {
         <div className='page-container'>
             <div className='quiz-select-container'>
                 <div className='quiz-id'>{id}</div>
-                <div className='quiz-title'>{state.title}</div>
+                <div className='quiz-title'>{state.question}</div>
                 <div className='show-hint' style={{display:"flex"}}>
                     <button onClick={clickShowHint}>힌트보기</button>
                     <div className='quiz-hint'>
@@ -58,7 +58,7 @@ function QuizSelect(props) {
                 }}/>
                 <button onClick={checkAnswer}>정답확인</button>
                 <div className='quiz-description'>
-                    {showHint&&<div>{state.description}</div>}
+                    {solved&&<div>{state.description}</div>}
                 </div>
 
                 <button onClick={goToModify}>수정하기</button>

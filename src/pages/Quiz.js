@@ -25,7 +25,11 @@ export default function Quiz() {
                 {
                     quizzes.map((quiz)=>{
                         return (
-                            <QuizThumb id={quiz['quizId']} title={quiz['question']} hint={quiz.hint} answer={quiz.answer} />
+                            <QuizThumb id={quiz['quizId']}
+                                       question={quiz['question']}
+                                       hint={quiz.hint}
+                                       answer={quiz.answer}
+                                       description={quiz.description} />
                         )
                     })
                 }
