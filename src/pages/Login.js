@@ -14,8 +14,11 @@ function Login(props) {
         axios.post('http://localhost:8080/api/users/login', {
             username: id,
             password: pwd
+        },{
+            withCredentials: true
         }).then(res=> {
             console.log(res);
+            navigate('/')
         }).catch(error => {
             alert(error)
             console.log(error)
