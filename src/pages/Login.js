@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function Login(props) {
 
@@ -8,15 +9,24 @@ function Login(props) {
 
     const navigate = useNavigate();
 
+
+    function loginBtnHandler() {
+        axios.post('http://localhost:8080/api/users/login', {
+            username: id,
+            password: pwd
+        }).then(res=> {
+            console.log(res);
+        }).catch(error => {
+            alert(error)
+            console.log(error)
+        })
+    }
+
+
     return (
         <div>Login
 
-            <form onClick={e => {
-                e.preventDefault()
-                console.log(`id: ${id}, pwd: ${pwd}`);
-                alert(`id: ${id}, pwd: ${pwd}`);
-
-            }}>
+            <div>
                 <div>
                     id: <input name={"id"} value={id} onChange={e => {
                     setId(e.target.value);
@@ -27,8 +37,14 @@ function Login(props) {
                     setPwd(e.target.value)
                 }}/>
                 </div>
-                <input type={"submit"} value={"로그인"}/>
-            </form>
+                <button value={"로그인"} onClick={e=>{
+                    e.preventDefault()
+                    // console.log(`id: ${id}, pwd: ${pwd}`);
+                    // alert(`id: ${id}, pwd: ${pwd}`);
+                    loginBtnHandler();
+                }}>로그인</button>
+            </div>
+
             <button onClick={e=>{
                 navigate('/sign-up');
             }}>회원가입</button>

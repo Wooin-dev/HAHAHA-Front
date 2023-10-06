@@ -20,12 +20,6 @@ function SignUp() {
         })
     }
 
-
-
-
-
-
-
     return (
         <div className={'page-container'}>
 
