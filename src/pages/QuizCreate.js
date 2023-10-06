@@ -36,7 +36,7 @@ function createQuizOnList(_question, _hint, _answer, _description) {
         answer: _answer,
         description: _description
     }).then((res) => {
-        console.log(res)
+        console.log(res);
     }).catch((error) => {
         console.log(error)
     })

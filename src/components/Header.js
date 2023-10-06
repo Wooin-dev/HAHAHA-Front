@@ -25,6 +25,11 @@ export default function Header() {
                                 마이페이지
                             </Link>
                         </li>
+                        <li>
+                            <Link className='header-nav-item' to='/login'>
+                                로그인
+                            </Link>
+                        </li>
                     </ul>
 
 

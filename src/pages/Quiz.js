@@ -13,7 +13,7 @@ export default function Quiz() {
         axios.get('http://localhost:8080/api/quizzes').then(res => {
             setQuizzes(res.data)
         }).catch(error => {
-            alert(error)
+            console.log(error)
         })
     }, [])
 

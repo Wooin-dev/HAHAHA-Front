@@ -8,6 +8,8 @@ import Rank from "./pages/Rank";
 import QuizSelect from "./pages/QuizSelect";
 import QuizCreate from "./pages/QuizCreate";
 import QuizModify from "./pages/QuizModify";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
                     <Route path="/quiz/modify/:id" element={<QuizModify/>}/>
                     <Route path="/rank" element={<Rank/>}/>
                     <Route path="/my-page" element={<Mypage/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/sign-up" element={<SignUp/>}/>
                     <Route path="/*" element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>
