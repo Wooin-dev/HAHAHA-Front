@@ -2,11 +2,17 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {KAKAO_AUTH_URL} from "../components/OAuth";
+import {useRecoilState} from "recoil";
+import {isLogined, loginUsername} from "../recoil/loginState";
+import {getCookie} from "../util/cookie";
 
 function Login(props) {
 
     const [id, setId] = useState("");
     const [pwd, setPwd] = useState("");
+
+    const [username, setUsername] = useRecoilState(loginUsername);
+    const [isLogin, setIsLogin] = useRecoilState(isLogined);
 
     const navigate = useNavigate();
 
@@ -19,7 +25,9 @@ function Login(props) {
             withCredentials: true
         }).then(res => {
             console.log(res);
-            navigate('/')
+            setUsername(getCookie('Login-Username'));
+            setIsLogin(true);
+            navigate('/');
         }).catch(error => {
             alert(error)
             console.log(error)
@@ -51,6 +59,7 @@ function Login(props) {
 
                 <button onClick={() => {
                     window.location.href = KAKAO_AUTH_URL;
+                    setUsername(getCookie('Login-Username'));
                 }}>카카오 로그인</button>
 
 
