@@ -1,7 +1,46 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {isLogined, loginUsername} from "../recoil/loginState";
+import {getCookie, removeCookie} from "../util/cookie";
 
 export default function Header() {
+
+    const [isLogin, setIsLogin] = useRecoilState(isLogined);
+    const [username, setUsername] = useRecoilState(loginUsername);
+    const navigate = useNavigate();
+
+
+    useEffect(()=>{
+        if (isLogin) {
+            setUsername(getCookie('Login-Username'));
+            setIsLogin(true);
+        }
+    },[])
+
+
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        removeCookie('Refresh-Token');
+        removeCookie('Authorization');
+        removeCookie('Login-Username');
+        setUsername(null);
+        setIsLogin(false);
+        navigate('/');
+    }
+
+    const LoginOutNav = isLogin
+        ?   <li>
+                <Link className='header-nav-item' onClick={ e => logoutHandler(e)}>
+                    로그아웃
+                </Link>
+            </li>
+        :   <li>
+                <Link className='header-nav-item' to='/login'>
+                    로그인
+                </Link>
+            </li>
+
     return (
         <div className="header-container">
             <div className="header-wrap">
@@ -25,11 +64,7 @@ export default function Header() {
                                 마이페이지
                             </Link>
                         </li>
-                        <li>
-                            <Link className='header-nav-item' to='/login'>
-                                로그인
-                            </Link>
-                        </li>
+                        {LoginOutNav}
                     </ul>
 
 
