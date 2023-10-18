@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {KAKAO_AUTH_URL} from "../components/OAuth";
 
 function Login(props) {
 
@@ -14,9 +15,9 @@ function Login(props) {
         axios.post('http://localhost:8080/api/users/login', {
             username: id,
             password: pwd
-        },{
+        }, {
             withCredentials: true
-        }).then(res=> {
+        }).then(res => {
             console.log(res);
             navigate('/')
         }).catch(error => {
@@ -40,17 +41,26 @@ function Login(props) {
                     setPwd(e.target.value)
                 }}/>
                 </div>
-                <button value={"로그인"} onClick={e=>{
+                <button value={"로그인"} onClick={e => {
                     e.preventDefault()
                     // console.log(`id: ${id}, pwd: ${pwd}`);
                     // alert(`id: ${id}, pwd: ${pwd}`);
                     loginBtnHandler();
-                }}>로그인</button>
+                }}>로그인
+                </button>
+
+                <button onClick={() => {
+                    window.location.href = KAKAO_AUTH_URL;
+                }}>카카오 로그인</button>
+
+
+
             </div>
 
-            <button onClick={e=>{
+            <button onClick={e => {
                 navigate('/sign-up');
-            }}>회원가입</button>
+            }}>회원가입
+            </button>
 
             <div>
                 <br/>

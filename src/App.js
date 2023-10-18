@@ -10,6 +10,7 @@ import QuizCreate from "./pages/QuizCreate";
 import QuizModify from "./pages/QuizModify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import LoginRedirect from "./pages/LoginRedirect";
 
 function App() {
 
@@ -20,13 +21,14 @@ function App() {
                 <Header/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
-                    <Route path="/quiz" element={<Quiz/>}/>
-                    <Route path="/quiz/:id" element={<QuizSelect/>}/>
-                    <Route path="/quiz/create" element={<QuizCreate/>}/>
-                    <Route path="/quiz/modify/:id" element={<QuizModify/>}/>
+                    <Route path="/quizzes" element={<Quiz/>}/>
+                    <Route path="/quizzes/:id" element={<QuizSelect/>}/>
+                    <Route path="/quizzes/create" element={<QuizCreate/>}/>
+                    <Route path="/quizzes/modify/:id" element={<QuizModify/>}/>
                     <Route path="/rank" element={<Rank/>}/>
                     <Route path="/my-page" element={<Mypage/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/api/users/kakao/callback" element={<LoginRedirect/>}/>
                     <Route path="/sign-up" element={<SignUp/>}/>
                     <Route path="/*" element={<NotFound/>}/>
                 </Routes>

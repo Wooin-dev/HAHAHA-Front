@@ -5,7 +5,7 @@ export default function QuizThumb(props) {
 
     const navigate = useNavigate();
     const onClickQuizItem = () => {
-        navigate(`/quiz/${props.id}`, {
+        navigate(`/quizzes/${props.id}`, {
             state: props
         })
     }

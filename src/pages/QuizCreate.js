@@ -1,8 +1,29 @@
-import React, {useState} from 'react';
-import {dummy} from "../quizDummy";
+import React from 'react';
 import axios from "axios";
+import {useNavigate, RedirectFunction} from "react-router-dom";
 
 function QuizCreate(props) {
+
+    const navigate = useNavigate();
+
+    function createQuizOnList(_question, _hint, _answer, _description) {
+
+    axios.post('http://localhost:8080/api/quizzes', {
+        question: _question,
+        hint: _hint,
+        answer: _answer,
+        description: _description
+    },{
+        withCredentials: true
+    }).then((res) => {
+        console.log(res);
+        navigate('/quizzes');
+    }).catch((error) => {
+        console.log('get error');
+        console.log(error);
+    })
+
+}
     return (
         <div className={'page-container'}>
             <h2>Quiz Create</h2>
@@ -28,20 +49,7 @@ function QuizCreate(props) {
 }
 
 
-function createQuizOnList(_question, _hint, _answer, _description) {
 
-    axios.post('http://localhost:8080/api/quizzes', {
-        question: _question,
-        hint: _hint,
-        answer: _answer,
-        description: _description
-    }).then((res) => {
-        console.log(res);
-    }).catch((error) => {
-        console.log(error)
-    })
-
-}
 
 
 export default QuizCreate;

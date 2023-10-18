@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
 function QuizSelect() {
@@ -15,13 +15,13 @@ function QuizSelect() {
     const [solved, setSolved] = useState(false);
 
     //데이터 가져오기
-    useEffect(()=>{
+    useEffect(() => {
         axios.get(`http://localhost:8080/api/quizzes/${id}`).then(res => {
             setQuiz(res.data)
         }).catch(error => {
             alert(error)
         })
-    },[])
+    }, [])
 
     const clickShowHint = () => {
         setShowHint(!showHint);
@@ -36,13 +36,19 @@ function QuizSelect() {
         }
     }
     const goToModify = () => {
-        navigate(`/quiz/modify/${id}`, {
+        navigate(`/quizzes/modify/${id}`, {
             state: quiz
         })
     }
     const deleteQuiz = () => {
-        axios.delete(`http://localhost:8080/api/quizzes/${id}`)
-        navigate('/quiz')
+        axios.delete(`http://localhost:8080/api/quizzes/${id}`, {
+            withCredentials: true
+        }).then(() => {
+            navigate('/quizzes');
+        }).catch(error => {
+            console.log(error);
+            navigate('/quizzes');
+        })
     };
 
 
@@ -51,10 +57,10 @@ function QuizSelect() {
             <div className='quiz-select-container'>
                 <div className='quiz-id'>{id}</div>
                 <div className='quiz-title'>{quiz.question}</div>
-                <div className='show-hint' style={{display:"flex"}}>
+                <div className='show-hint' style={{display: "flex"}}>
                     <button onClick={clickShowHint}>힌트보기</button>
                     <div className='quiz-hint'>
-                        {showHint&&<div>{quiz.hint}</div>}
+                        {showHint && <div>{quiz.hint}</div>}
                     </div>
                 </div>
             </div>
@@ -62,11 +68,11 @@ function QuizSelect() {
                 <input type='text'
                        value={answerIn}
                        onChange={(e) => {
-                    setAnswerIn(e.target.value)
-                }}/>
+                           setAnswerIn(e.target.value)
+                       }}/>
                 <button onClick={checkAnswer}>정답확인</button>
                 <div className='quiz-description'>
-                    {solved&&<div>{quiz.description}</div>}
+                    {solved && <div>{quiz.description}</div>}
                 </div>
 
                 <button onClick={goToModify}>수정</button>

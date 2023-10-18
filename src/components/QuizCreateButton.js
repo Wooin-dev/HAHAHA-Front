@@ -5,8 +5,8 @@ import {dummy} from "../quizDummy";
 function QuizCreateButton() {
 
     const navigate = useNavigate();
-    const onClickQuizCreate = (ddd) => {
-        navigate(`/quiz/create`)
+    const onClickQuizCreate = () => {
+        navigate(`/quizzes/create`)
     }
 
 

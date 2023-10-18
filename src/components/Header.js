@@ -11,7 +11,7 @@ export default function Header() {
                     </Link>
                     <ul>
                         <li>
-                            <Link className='header-nav-item' to='/quiz'>
+                            <Link className='header-nav-item' to='/quizzes'>
                                 퀴즈
                             </Link>
                         </li>
