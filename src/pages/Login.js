@@ -34,23 +34,6 @@ function Login(props) {
         })
     }
 
-    // function kakaoLoginBtnHandler() {
-    //     axios.get(KAKAO_AUTH_URL,{
-    //         headers:{
-    //
-    //         }
-    //         withCredentials: true
-    //     }).then(res => {
-    //         console.log(res);
-    //         setUsername(getCookie('Login-Username'));
-    //         setIsLogin(true);
-    //         navigate('/');
-    //     }).catch(error => {
-    //         alert(error)
-    //         console.log(error)
-    //     })
-    // }
-
 
     return (
         <div>Login
@@ -68,22 +51,19 @@ function Login(props) {
                 </div>
                 <button value={"로그인"} onClick={e => {
                     e.preventDefault()
+                    // console.log(`id: ${id}, pwd: ${pwd}`);
+                    // alert(`id: ${id}, pwd: ${pwd}`);
                     loginBtnHandler();
                 }}>로그인
                 </button>
 
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    // kakaoLoginBtnHandler();
-
-                    // try {
-                    window.open(KAKAO_AUTH_URL, '_self');
-                    // } catch (e) {
-                    //     console.log(e)
-                    //     navigate('/login')
-                    // }
-                    // setUsername(getCookie('Login-Username'));
+                <button onClick={() => {
+                    window.location.href = KAKAO_AUTH_URL;
+                    setUsername(getCookie('Login-Username'));
                 }}>카카오 로그인</button>
+
+
+
             </div>
 
             <button onClick={e => {
