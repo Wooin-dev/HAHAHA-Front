@@ -16,11 +16,13 @@ export default function Header() {
             setUsername(getCookie('Login-Username'));
             setIsLogin(true);
         }
-    }, [])
+    }, [isLogin])
 
 
     const logoutHandler = (e) => {
         e.preventDefault();
+        console.log('logout handler worked')
+
         removeCookie('Refresh-Token');
         removeCookie('Authorization');
         removeCookie('Login-Username');
@@ -29,7 +31,7 @@ export default function Header() {
         navigate('/');
     }
 
-    const LoginOutNav = isLogin
+    const loginOutNav = isLogin
         ? <li>
             <Link className='header-nav-item' onClick={e => logoutHandler(e)}>
                 로그아웃
@@ -64,14 +66,15 @@ export default function Header() {
                                 마이페이지
                             </Link>
                         </li>
-                        {isLogin &&
+                        {
+                            isLogin &&
                             <li>
                                 <div className='header-nav-item'>
                                     {username}님 안녕하세요.
                                 </div>
                             </li>
                         }
-                        {LoginOutNav}
+                        {loginOutNav}
                     </ul>
 
 

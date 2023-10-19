@@ -11,8 +11,27 @@ import QuizModify from "./pages/QuizModify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginRedirect from "./pages/LoginRedirect";
+import {useSetRecoilState} from "recoil";
+import {isLogined, loginUsername} from "./recoil/loginState";
+import {useEffect} from "react";
+import {getCookie} from "./util/cookie";
 
 function App() {
+
+    const setUserInfo = useSetRecoilState(loginUsername);
+    const setIsLogin = useSetRecoilState(isLogined);
+
+    useEffect(()=>{
+
+        console.log("App 컴포넌트 렌더링");
+
+        const loginUserInfo = getCookie('Login-Username');
+        console.log(`로그인 유저 : ${loginUserInfo}`);
+        if (loginUserInfo) {
+            setUserInfo(loginUserInfo);
+            setIsLogin(true);
+        }
+    },[])
 
     return (
         <div className='root-wrap'>

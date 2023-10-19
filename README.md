@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# HAHAHA-Back
+하하하 웹 제작 백엔드
+<br><br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ERD
+https://lucid.app/lucidchart/ec2b6080-9697-4771-9254-20e8d4458497/edit?viewport_loc=-1136%2C-664%2C2815%2C976%2C0_0&invitationId=inv_ad146077-8791-417e-912d-c6b2ffaab88f
+<br><br>
 
-## Available Scripts
+---
+# 🏁 MileStone
 
-In the project directory, you can run:
+## 🛹 init
+- 기본 CRUD 구현
+- 사용자 기능 추가
+- 소셜 로그인 기능 추가
+- 🚩로그인 기능 구현
+- RefreshToken 적용
+- 댓글기능 구현
+- 좋아요 기능 추가
+- 마이페이지 기능 (내가 풀은 문제, 못 풀은 문제, 내 점수 등)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛴 Basic feature
+- 정답 리스트로 확장 (예비 정답)
+- 퀴즈 정답확인 후 평가 기능 추가
+- 퀴즈 추천 알고리즘 (힌트만 본 경우, 정답률, 오답률, 평가, 좋아요, 댓글 수)
+- 메인페이지 상 랜덤 퀴즈 출현 기능 추가
+- 회원 포인트 기능 추가
+- 회원 칭호 기능 추가
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚲 Plus feature
+- 유사 정답 체크 알고리즘 구성
+- 정답 확인 후 효과음
+- 공유기능 추가 (인스타 스토리용 자동 이미지 생성)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br><br><br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
+# Update
 
-### `npm run eject`
+### 230806
+- 기본기능 제작
+- 문제가 출제되고 정답을 입력받아 결과가 출력.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 231001
+- 퀴즈 CRUD 구현
+- 프론트엔드 연결 완료 (Cors 설정 완료)
+- 힌트보기 기능, 정답/오답 확인 기능 구현
