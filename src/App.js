@@ -11,27 +11,25 @@ import QuizModify from "./pages/QuizModify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginRedirect from "./pages/LoginRedirect";
-import {useSetRecoilState} from "recoil";
-import {isLogined, loginUsername} from "./recoil/loginState";
 import {useEffect} from "react";
-import {getCookie} from "./util/cookie";
+import {useRecoilState} from "recoil";
+import {UserInfoAtom} from "./recoil/loginState";
 
 function App() {
 
-    const setUserInfo = useSetRecoilState(loginUsername);
-    const setIsLogin = useSetRecoilState(isLogined);
+    console.log('App 컴포넌트 실행');
 
-    useEffect(()=>{
+    const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
 
-        console.log("App 컴포넌트 렌더링");
+    useEffect(() => {
+        const storedUserInfo = localStorage.getItem('user-info');
+        const parsedUserInfoJson = JSON.parse(storedUserInfo);
+        setUserInfo(parsedUserInfoJson);
 
-        const loginUserInfo = getCookie('Login-Username');
-        console.log(`로그인 유저 : ${loginUserInfo}`);
-        if (loginUserInfo) {
-            setUserInfo(loginUserInfo);
-            setIsLogin(true);
-        }
-    },[])
+        console.log('userInfo Set완료 : ')
+        console.log(userInfo);
+    }, [])
+
 
     return (
         <div className='root-wrap'>

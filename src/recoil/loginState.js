@@ -1,11 +1,12 @@
-import { atom } from 'recoil';
+import {atom, selector} from 'recoil';
 
-export const isLogined = atom({
-    key: 'loginState',
-    default: false
+export const isLoginSelector = selector({
+    key: 'isLoginSelector',
+    get: ({get}) => !!get(UserInfoAtom)
 });
 
-export const loginUsername = atom({
-    key: 'loginUsername',
-    default: null
+export const UserInfoAtom = atom({
+    key: 'UserInfoAtom',
+    default: undefined,
+    // effects_UNSTABLE: [persistAtom]
 });

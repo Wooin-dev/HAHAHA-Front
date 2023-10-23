@@ -3,16 +3,14 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {KAKAO_AUTH_URL} from "../components/OAuth";
 import {useRecoilState} from "recoil";
-import {isLogined, loginUsername} from "../recoil/loginState";
-import {getCookie} from "../util/cookie";
+import {UserInfoAtom} from "../recoil/loginState";
 
-function Login(props) {
+function Login() {
 
     const [id, setId] = useState("");
     const [pwd, setPwd] = useState("");
 
-    const [username, setUsername] = useRecoilState(loginUsername);
-    const [isLogin, setIsLogin] = useRecoilState(isLogined);
+    const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
 
     const navigate = useNavigate();
 
@@ -24,10 +22,9 @@ function Login(props) {
         }, {
             withCredentials: true
         }).then(res => {
-            console.log(res);
-            setUsername(getCookie('Login-Username'));
-            setIsLogin(true);
-            navigate('/');
+            setUserInfo(res.data);
+            localStorage.setItem('user-info', JSON.stringify(res.data));
+            navigate('/',);
         }).catch(error => {
             alert(error)
             console.log(error)
@@ -50,18 +47,16 @@ function Login(props) {
                 }}/>
                 </div>
                 <button value={"로그인"} onClick={e => {
-                    e.preventDefault()
-                    // console.log(`id: ${id}, pwd: ${pwd}`);
-                    // alert(`id: ${id}, pwd: ${pwd}`);
+                    e.preventDefault();
                     loginBtnHandler();
                 }}>로그인
                 </button>
 
-                <button onClick={() => {
+                <button onClick={(e) => {
+                    e.preventDefault();
                     window.location.href = KAKAO_AUTH_URL;
-                    setUsername(getCookie('Login-Username'));
-                }}>카카오 로그인</button>
-
+                }}>카카오 로그인
+                </button>
 
 
             </div>
