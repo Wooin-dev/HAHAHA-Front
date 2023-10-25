@@ -20,7 +20,8 @@ export default function Header() {
         setUserInfo(undefined);
         localStorage.removeItem('user-info');
 
-        navigate('/');
+        window.location.href="/";
+        // navigate('/');
     }
 
     const LoginOutNav = isLogin
