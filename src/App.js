@@ -14,6 +14,7 @@ import LoginRedirect from "./pages/LoginRedirect";
 import {useEffect} from "react";
 import {useRecoilState} from "recoil";
 import {UserInfoAtom} from "./recoil/loginState";
+import {getCookie} from "./util/cookie";
 
 function App() {
 
@@ -22,12 +23,22 @@ function App() {
     const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
 
     useEffect(() => {
-        const storedUserInfo = localStorage.getItem('user-info');
-        const parsedUserInfoJson = JSON.parse(storedUserInfo);
-        setUserInfo(parsedUserInfoJson);
 
-        console.log('userInfo Set완료 : ')
-        console.log(userInfo);
+        const cookie = getCookie('Authorization');
+
+        if (cookie===undefined) {
+            console.log('Authorization 쿠키가 없다')
+            localStorage.removeItem('user-info');
+
+        } else {
+            console.log('Authorization 쿠키가 있다')
+            const storedUserInfo = localStorage.getItem('user-info');
+            const parsedUserInfoJson = JSON.parse(storedUserInfo);
+            setUserInfo(parsedUserInfoJson);
+
+            console.log('userInfo Set완료 : ')
+            console.log(userInfo);
+        }
     }, [])
 
 
