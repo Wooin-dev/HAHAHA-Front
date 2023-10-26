@@ -1,13 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import QuizThumb from "../components/QuizThumb";
+import ReplyOne from "../components/ReplyOne";
+import ReplySubmit from "../components/ReplySubmit";
 
-function QuizSelect() {
+function QuizOne() {
 
     const navigate = useNavigate();
 
     const {id} = useParams();
     const [quiz, setQuiz] = useState({});
+    const [replies, setReplies] = useState([]);
     const answer = quiz.answer;
 
     const [answerIn, setAnswerIn] = useState('');
@@ -18,6 +22,7 @@ function QuizSelect() {
     useEffect(() => {
         axios.get(`http://localhost:8080/api/quizzes/${id}`).then(res => {
             setQuiz(res.data)
+            setReplies(res.data.replies);
         }).catch(error => {
             alert(error)
         })
@@ -51,6 +56,24 @@ function QuizSelect() {
         })
     };
 
+    const submitReplyHandler = (writingReply) => {
+
+        axios.post(`http://localhost:8080/api/quizzes/${id}/replies`,
+            {
+                contents: writingReply,
+            }, {
+                withCredentials: true,
+            }
+        ).then(res => {
+            addReply(res.data);
+        })
+    }
+
+    const addReply = (newReply) => {
+        const updatedReplies = [...replies, newReply];
+        setReplies(updatedReplies);
+    }
+
 
     return (
         <div className='page-container'>
@@ -79,9 +102,28 @@ function QuizSelect() {
                 <button onClick={deleteQuiz}>삭제</button>
 
             </div>
+            <div className='quiz-reply-container'>
+                <div className='quiz-reply-submit'>
+                    <ReplySubmit quizId={id} onClickHandler={submitReplyHandler}/>
+                </div>
+                <div className='quiz-reply-list'>
+                    {
+                        replies.map(reply => {
+                            return (
+                                <ReplyOne key={reply['id']}
+                                          contents={reply['contents']}
+                                          author={reply['author']}
+                                          createdAt={reply['createdAt']}
+
+                                />
+                            )
+                        })
+                    }
+                </div>
+            </div>
         </div>
     );
 }
 
 
-export default QuizSelect;
+export default QuizOne;

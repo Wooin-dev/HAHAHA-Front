@@ -11,7 +11,7 @@ export default function Quiz() {
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/quizzes').then(res => {
-            setQuizzes(res.data)
+            setQuizzes(res.data);
         }).catch(error => {
             console.log(error)
         })
