@@ -10,10 +10,17 @@ function QuizCreateButton() {
     }
 
 
-
     return (
-        <div className={'quiz-create'} onClick={onClickQuizCreate}>
-            quizCreate
+        <div className="
+        w-[100px] m-auto py-1.5
+        text-sm text-white font-bold text-center
+
+        bg-blue-500 hover:bg-blue-700 ease-out duration-300
+        rounded-full shadow
+
+        cursor-pointer
+
+        " onClick={onClickQuizCreate}>
             퀴즈 만들기
         </div>
     );

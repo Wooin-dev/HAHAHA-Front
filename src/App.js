@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
-import Quiz from "./pages/Quiz";
+import QuizListPage from "./pages/QuizListPage";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 import Mypage from "./pages/Mypage";
@@ -43,13 +43,14 @@ function App() {
 
 
     return (
-        <div className='root-wrap'>
+        <div className="w-[1200px] m-auto pb-10">
             <BrowserRouter>
                 {/*Routes 영향 받지 않는 페이지는 태그 바깥으로*/}
                 <Header/>
                 <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/quizzes" element={<Quiz/>}/>
+                    {/*<Route path="/" element={<Home/>}/>*/}
+                    <Route path="/" element={<QuizListPage/>}/>
+                    <Route path="/quizzes" element={<QuizListPage/>}/>
                     <Route path="/quizzes/:id" element={<QuizOne/>}/>
                     <Route path="/quizzes/create" element={<QuizCreate/>}/>
                     <Route path="/quizzes/modify/:id" element={<QuizModify/>}/>

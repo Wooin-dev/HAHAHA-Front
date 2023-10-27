@@ -20,7 +20,7 @@ export default function Header() {
         setUserInfo(undefined);
         localStorage.removeItem('user-info');
 
-        window.location.href="/";
+        window.location.href = "/";
         // navigate('/');
     }
 
@@ -50,27 +50,46 @@ export default function Header() {
         </li>
 
     return (
-        <div className="header-container">
-            <div className="header-wrap">
-                <div className="header-left-wrap">
-                    <Link style={{display: 'flex', alignItems: 'center'}} to='/'>
-                        Go to home
-                    </Link>
-                    <ul>
-                        <li>
-                            <Link className='header-nav-item' to='/quizzes'>
-                                퀴즈
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className='header-nav-item' to='/rank'>
-                                아재왕
-                            </Link>
-                        </li>
-                        {LoginOutNav}
-                    </ul>
-                </div>
+        <header
+            className="mb-5 bg-gray-100 shadow text-black min-w-2100 w-full flex justify-between items-center p-2 z-10">
+            <div className="flex items-center">
+                <Link className="text-xl font-bold ml-10 whitespace-nowrap flex-shrink-0" to="/">푸하하</Link>
+                <nav className="ml-10 space-x-4 whitespace-nowrap flex-shrink-0">
+                    <Link to="/quizzes" className="hover:text-gray-400">유-우머들</Link>
+                    <Link to="/rank" className="hover:text-gray-400">아재왕</Link>
+                </nav>
             </div>
-        </div>
+            <div className="ml-auto mr-5 space-x-4">
+                <Link to="/rank" className="text-sm">마이 페이지</Link>
+                {/*<a href="#" className="text-sm font-semibold leading-6 text-gray-900"></a>*/}
+                <Link to="/login">
+                    <button className="text-sm leading-6 text-gray-900">Log in
+                        {/*<span aria-hidden="true">&rarr;</span>*/}
+                    </button>
+                </Link>
+            </div>
+        </header>
+        // <div className="header-container">
+        //     <div className="header-wrap">
+        //         <div className="header-left-wrap">
+        //             <Link style={{display: 'flex', alignItems: 'center'}} to='/'>
+        //                 Go to home
+        //             </Link>
+        //             <ul>
+        //                 <li>
+        //                     <Link className='header-nav-item' to='/quizzes'>
+        //                         퀴즈
+        //                     </Link>
+        //                 </li>
+        //                 <li>
+        //                     <Link className='header-nav-item' to='/rank'>
+        //                         아재왕
+        //                     </Link>
+        //                 </li>
+        //                 {LoginOutNav}
+        //             </ul>
+        //         </div>
+        //     </div>
+        // </div>
     )
 }
