@@ -38,8 +38,8 @@ export default function QuizThumb(props) {
     return (
         <div onClick={onClickQuizItem}
              className="
-            w-auto h-20
-            m-auto p-1.5 pl-4
+            w-auto h-24
+            m-auto p-1.5 px-6
             space-y-px
             rounded shadow
             cursor-pointer
