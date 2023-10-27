@@ -17,9 +17,12 @@ export default function Home() {
     return (
         <div>
             <div>Home</div>
-            <div>Username : {isLogin ? userInfo.username : ''}</div>
-            <div>Login : {loginStatus}</div>
-            <div>Authorization : {authorization}</div>
+            <div>Home</div>
+            <div>Home</div>
+            <div>Home</div>
+            {/*<div>Username : {isLogin ? userInfo.username : ''}</div>*/}
+            {/*<div>Login : {loginStatus}</div>*/}
+            {/*<div>Authorization : {authorization}</div>*/}
         </div>
     )
 }
