@@ -3,6 +3,9 @@ import {Link, useNavigate} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import {isLoginSelector, UserInfoAtom} from "../recoil/loginState";
 import {removeCookie} from "../util/cookie";
+import {KAKAO_AUTH_URL} from "./OAuth";
+
+// import kakaoLoginBtnImg from './src_assets/kakao_login_medium_wide.png';
 
 export default function Header() {
 
@@ -24,11 +27,9 @@ export default function Header() {
         window.location.href = "/";
         // navigate('/');
     }
-
     const handleOpenModal = () => {
         setShowModal(true);
     };
-
     const handleCloseModal = () => {
         setShowModal(false);
     };
@@ -37,23 +38,32 @@ export default function Header() {
 
         return (
             <div className={showHideClassName}>
-                <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+                <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+                     onClick={handleClose}></div>
                 <div
                     className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-                    <div className="modal-content py-4 text-left px-6">
+                    <div className="modal-content py-4 text-left px-6 relative">
                         <div>
-                            <h2 className="text-2xl font-bold">모달 제목</h2>
-                            <p className="mt-2">모달 내용</p>
+                            <h2 className="text-2xl font-bold text-center my-5">로그인</h2>
+                            <p className="mt-2 text-center">소셜 로그인으로 간편하게 이용하세요.</p>
                         </div>
-                        <div className="mt-4 text-right">
-                            <button onClick={handleClose}
-                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                닫기
-                            </button>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M20 20L4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <div className="absolute top-2 right-2 cursor-pointer"
+                             onClick={handleClose}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                                <path d="M20 20L4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
                             </svg>
+                        </div>
+                        <div className="">
+                            <img className="mx-auto mt-7 mb-5 cursor-pointer"
+                                 src="img/kakao_login_medium_wide.png" alt="카카오로 로그인하기"
+                                 onClick={(e) => {
+                                     e.preventDefault();
+                                     window.location.href = KAKAO_AUTH_URL;
+                                 }}/>
                         </div>
                     </div>
                 </div>
@@ -61,33 +71,33 @@ export default function Header() {
         );
     };
 
-    const LoginOutNav = isLogin
-        ?
-        <>
-            <li>
-                <div className='header-nav-item'>
-                    {isLogin && userInfo.nickname}님 안녕하세요.
+    const LoginOutNav = () => {
+        return (
+            isLogin
+                ?
+                <div className="text-sm text-gray-600 ml-auto mr-5 space-x-4 flex">
+                    <div className="">
+                        {isLogin && userInfo.nickname}님 안녕하세요.
+                    </div>
+                    <Link className=""
+                          to={"/my-page"}>
+                        마이페이지
+                    </Link>
+                    <div className="cursor-pointer hover:text-gray-800"
+                         onClick={e => logoutHandler(e)}>
+                        로그아웃
+                    </div>
                 </div>
-            </li>
-            <li>
-                <Link className='header-nav-item' to='/my-page'>
-                    마이페이지
-                </Link>
-            </li>
-            <li>
-                <Link className='header-nav-item' onClick={e => logoutHandler(e)}>
-                    로그아웃
-                </Link>
-            </li>
-        </>
-        : <li>
-            <Link className='header-nav-item' to='/login'>
-                로그인
-            </Link>
-        </li>
+                : <button onClick={handleOpenModal}
+                          className="text-sm leading-6 text-white bg-blue-500 font-bold py-2 px-4 rounded">
+                    로그인
+                </button>
+        )
+    }
 
     return (
-        <header className="mb-5 bg-gray-100 shadow text-black min-w-2100 w-full flex justify-between items-center p-2 z-10">
+        <header
+            className="mb-5 bg-gray-100 shadow text-black min-w-2100 w-full flex justify-between items-center p-2 z-10">
             <div className="flex items-center">
                 <Link className="text-xl font-bold ml-10 whitespace-nowrap flex-shrink-0" to="/">푸하하</Link>
                 <nav className="ml-10 space-x-4 whitespace-nowrap flex-shrink-0">
@@ -95,16 +105,7 @@ export default function Header() {
                     <Link to="/rank" className="hover:text-gray-400">아재왕</Link>
                 </nav>
             </div>
-            <div className="ml-auto mr-5 space-x-4">
-                <Link to="/rank" className="text-sm">
-                    마이 페이지
-                </Link>
-                {/*<Link to="/login"></Link>*/}
-                <button onClick={handleOpenModal}
-                        className="text-sm leading-6 text-white bg-blue-500 font-bold py-2 px-4 rounded">
-                    로그인
-                </button>
-            </div>
+            <LoginOutNav/>
             <LoginModalContents show={showModal} handleClose={handleCloseModal}/>
         </header>
     )
