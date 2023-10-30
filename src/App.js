@@ -43,7 +43,7 @@ function App() {
 
 
     return (
-        <div className="w-[1200px] m-auto pb-10">
+        <div className="w-[1000px] m-auto pb-10">
             <BrowserRouter>
                 {/*Routes 영향 받지 않는 페이지는 태그 바깥으로*/}
                 <Header/>

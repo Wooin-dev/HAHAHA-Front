@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import axios from "axios";
 import {useSetRecoilState} from "recoil";
 import {UserInfoAtom} from "../recoil/loginState";
@@ -30,11 +30,14 @@ const LoginRedirect = () => {
 
 
     return (
-        <div className="LoginHandeler">
-            <div className="notice">
-                <p>로그인 중입니다.</p>
-                <p>잠시만 기다려주세요.</p>
-                <div className="spinner"></div>
+        <div className="flex items-center justify-center h-[80vh]">
+            <div>
+                <div
+                    className="animate-spin mx-auto mb-5 rounded-full h-16 w-16 border-t-4 border-cyan-600 border-cyan-700"></div>
+                <div className="text-center">
+                    <p>로그인 중입니다.</p>
+                    <p>잠시만 기다려주세요.</p>
+                </div>
             </div>
         </div>
     );
