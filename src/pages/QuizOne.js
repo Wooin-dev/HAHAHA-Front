@@ -96,10 +96,9 @@ function QuizOne() {
                     </div>
                 </div>
                 <div id="answer-input description"
-                     className="min-h-[100px] bg-gray-100 py-4 my-8">
+                     className="bg-gray-100 py-4 my-8">
                     <div className="flex flex-col items-center">
-                        <p className="text-sm mb-2">그거슨..</p>
-
+                        <p className="text-sm ml-1 mb-2">그거슨..</p>
                         <div className="space-x-2">
                             <span className="text-lg font-bold">'</span>
                             <input
@@ -118,11 +117,11 @@ function QuizOne() {
                         </button>
                     </div>
                     <div id='quiz-description'
-                         className="flex flex-col items-center my-10">
-                        {solved && <>
-                            <p className="text-sm font-bold">왜냐하면~</p>
+                         className="flex flex-col items-center">
+                        {solved && <div className="py-7 mt-2 text-center">
+                            <p className="text-sm font-bold ml-2">왜냐하면~</p>
                             <div>{quiz.description}</div>
-                        </>}
+                        </div>}
                     </div>
                 </div>
                 <div id="btns"
