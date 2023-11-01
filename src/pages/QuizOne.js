@@ -106,8 +106,15 @@ function QuizOne() {
                                 type='text'
                                 value={answerIn}
                                 placeholder={'음...'}
+                                onKeyDown={e => {
+                                    if (e.key === 'Enter') {
+                                        checkAnswer();
+                                        console.log('Enter키 쳤다!');
+                                    }
+                                }}
                                 onChange={(e) => {
-                                    setAnswerIn(e.target.value)
+                                    setAnswerIn(e.target.value);
+
                                 }}/>
                             <span className="text-lg font-bold">'</span>
                         </div>
