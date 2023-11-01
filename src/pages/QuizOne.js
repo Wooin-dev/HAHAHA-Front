@@ -86,26 +86,43 @@ function QuizOne() {
                     {quiz.question}
                 </div>
                 <div id="hint" className="flex items-center space-x-2 mb-5">
-                    <button className="text-[12px] font-bold bg-blue-300 p-1.5 rounded-xl "
+                    <button className="text-[12px] text-gray-500 p-1 px-2 border-[1px] border-b-2 border-gray-300 "
                             onClick={clickShowHint}>
-                        GIVE ME HINT!
+                        힌트 주세요!
                     </button>
-                    <div id='quiz-hint'>
+                    <div id='quiz-hint'
+                         className="text-sm ">
                         {showHint && <div>{quiz.hint}</div>}
                     </div>
                 </div>
                 <div id="answer-input description"
-                     className="min-h-[100px] flex flex-col items-center bg-cyan-50">
-                    <input className="w-[100px] bg-blue-800 p-5 text-center text-white placeholder:text-gray-400 rounded-2xl"
-                           type='text'
-                           value={answerIn}
-                           placeholder={'음...'}
-                           onChange={(e) => {
-                               setAnswerIn(e.target.value)
-                           }}/>
-                    <button onClick={checkAnswer}>정답확인</button>
-                    <div className='quiz-description'>
-                        {solved && <><p>왜냐하면~</p><div>{quiz.description}</div></>}
+                     className="min-h-[100px] bg-gray-100 py-4 my-8">
+                    <div className="flex flex-col items-center">
+                        <p className="text-sm mb-2">그거슨..</p>
+
+                        <div className="space-x-2">
+                            <span className="text-lg font-bold">'</span>
+                            <input
+                                className="w-[200px] p-2 mb-3 text-center font-bold placeholder:text-gray-300 rounded-sm"
+                                type='text'
+                                value={answerIn}
+                                placeholder={'음...'}
+                                onChange={(e) => {
+                                    setAnswerIn(e.target.value)
+                                }}/>
+                            <span className="text-lg font-bold">'</span>
+                        </div>
+                        <button onClick={checkAnswer}
+                                className="text-white bg-gray-800 p-1 px-4 rounded-2xl border-b-[3px] border-b-gray-500 cursor-pointer">
+                            아닌가요?
+                        </button>
+                    </div>
+                    <div id='quiz-description'
+                         className="flex flex-col items-center my-10">
+                        {solved && <>
+                            <p className="text-sm font-bold">왜냐하면~</p>
+                            <div>{quiz.description}</div>
+                        </>}
                     </div>
                 </div>
                 <div id="btns"

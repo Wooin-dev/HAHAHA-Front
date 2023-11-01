@@ -59,7 +59,7 @@ export default function Header() {
                         </div>
                         <div className="">
                             <img className="mx-auto mt-7 mb-5 cursor-pointer"
-                                 src="img/kakao_login_medium_wide.png" alt="카카오로 로그인하기"
+                                 src="/img/kakao_login_medium_wide.png" alt="카카오로 로그인하기"
                                  onClick={(e) => {
                                      e.preventDefault();
                                      window.location.href = KAKAO_AUTH_URL;

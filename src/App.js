@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
-import QuizListPage from "./pages/QuizListPage";
+import QuizListPage from "./pages/QuizListPage/QuizListPage";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 import Mypage from "./pages/Mypage";
