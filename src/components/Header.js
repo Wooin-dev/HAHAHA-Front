@@ -51,15 +51,15 @@ export default function Header() {
                              onClick={handleClose}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 4L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                      stroke-linejoin="round"></path>
-                                <path d="M20 20L4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                      stroke-linejoin="round"></path>
+                                <path d="M20 4L4 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                      strokeLinejoin="round"></path>
+                                <path d="M20 20L4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                      strokeLinejoin="round"></path>
                             </svg>
                         </div>
                         <div className="">
                             <img className="mx-auto mt-7 mb-5 cursor-pointer"
-                                 src="img/kakao_login_medium_wide.png" alt="카카오로 로그인하기"
+                                 src="/img/kakao_login_medium_wide.png" alt="카카오로 로그인하기"
                                  onClick={(e) => {
                                      e.preventDefault();
                                      window.location.href = KAKAO_AUTH_URL;
