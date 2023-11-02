@@ -5,7 +5,7 @@ import React from "react";
 const Pagination = ({startPage, setStartPage, currentPage, setCurrentPage, totalPages, onPageChange}) => {
     let pageNumbers = []; // pageNumbers를 let으로 변경
 
-    const maxVisibleButtons = 5;
+    const maxVisibleButtons = 10;
 
     const renderPageNumbers = () => {
         pageNumbers = []; // 페이지 렌더링 전에 배열을 초기화

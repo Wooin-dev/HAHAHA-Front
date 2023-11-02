@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Mypage from "./pages/Mypage";
 import Rank from "./pages/Rank";
 import QuizOne from "./pages/QuizOne";
-import QuizCreate from "./pages/QuizCreate";
+import QuizRequest from "./pages/QuizRequest";
 import QuizModify from "./pages/QuizModify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -52,7 +52,7 @@ function App() {
                     <Route path="/" element={<QuizListPage/>}/>
                     <Route path="/quizzes" element={<QuizListPage/>}/>
                     <Route path="/quizzes/:id" element={<QuizOne/>}/>
-                    <Route path="/quizzes/create" element={<QuizCreate/>}/>
+                    <Route path="/quizzes/create" element={<QuizRequest/>}/>
                     <Route path="/quizzes/modify/:id" element={<QuizModify/>}/>
                     <Route path="/rank" element={<Rank/>}/>
                     <Route path="/my-page" element={<Mypage/>}/>
