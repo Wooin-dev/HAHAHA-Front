@@ -18,6 +18,8 @@ function QuizOne() {
     const [showHint, setShowHint] = useState(false);
     const [solved, setSolved] = useState(false);
 
+    const userInfoLocal = JSON.parse(localStorage.getItem('user-info'));
+
     //데이터 가져오기
     useEffect(() => {
         axios.get(`http://localhost:8080/api/quizzes/${id}`).then(res => {
@@ -74,12 +76,27 @@ function QuizOne() {
         setReplies(updatedReplies);
     }
 
+    const BtnRow = () => {
+        return (
+            <div id="btns"
+                 className="space-x-2 flex justify-end">
+
+                <button onClick={goToModify}
+                        className="text-xs p-1.5 bg-gray-500 text-white rounded-xl">수정
+                </button>
+                <button onClick={deleteQuiz}
+                        className="text-xs p-1 border-[1px] border-gray-400 text-gray-400 rounded-xl">삭제
+                </button>
+            </div>
+        )
+    }
 
     return (
         <div className="p-3 mx-auto w-[600px]">
             <div className="border-2 p-5">
-                <div className="text-xs mb-2">
-                    Quiz. {id}
+                <div className=" mb-2 flex justify-between">
+                    <div className="text-xs"> Quiz. {id} </div>
+                    <div className="text-sm mr-4"> <span className="text-xs">by.</span> {quiz.author} </div>
                 </div>
                 <div id='quiz-title'
                      className="text-3xl mb-4">
@@ -131,16 +148,10 @@ function QuizOne() {
                         </div>}
                     </div>
                 </div>
-                <div id="btns"
-                     className="space-x-2 flex justify-end">
+                {userInfoLocal.id === quiz.authorId && (
+                    <BtnRow/>
+                )}
 
-                    <button onClick={goToModify}
-                            className="text-xs p-1.5 bg-gray-500 text-white rounded-xl">수정
-                    </button>
-                    <button onClick={deleteQuiz}
-                            className="text-xs p-1 border-[1px] border-gray-400 text-gray-400 rounded-xl">삭제
-                    </button>
-                </div>
             </div>
 
             <div id='quiz-reply-container'

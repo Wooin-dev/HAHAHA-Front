@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
 
 import QuizThumb from "../../components/QuizThumb";
-import QuizCreateButton from "./Components/QuizCreateButton";
 import axios from "axios";
-import Pagination from "./Components/PageBtnRow";
 import PageBtnRow from "./Components/PageBtnRow";
 import Title from "../../components/Title";
 import UtilBtnLine from "./Components/UtilBtnLine";
