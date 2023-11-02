@@ -9,10 +9,10 @@ import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <React.StrictMode>
-    <CookiesProvider>
-        <RecoilRoot>
-            <App/>
-        </RecoilRoot>
-    </CookiesProvider>
+        <CookiesProvider>
+            <RecoilRoot>
+                <App/>
+            </RecoilRoot>
+        </CookiesProvider>
     // </React.StrictMode>
 );

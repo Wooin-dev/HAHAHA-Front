@@ -123,11 +123,11 @@ export default function Mypage() {
                     <div id="my-stastics"
                          className="flex justify-center space-x-2 my-20">
                         <div className="text-center w-[150px]">
-                            <p className="text-3xl my-2">{myProfile.createdQuizCnt}</p>
+                            <p className="text-3xl my-2">0</p>
                             <p className="text-sm font-bold">도전한 퀴즈 수</p>
                         </div>
                         <div className="text-center w-[150px]">
-                            <p className="text-3xl my-2">{myProfile.createdQuizCnt}</p>
+                            <p className="text-3xl my-2">0</p>
                             <p className="text-sm font-bold">풀은 퀴즈 수</p>
                         </div>
                         <div className="text-center w-[150px]">

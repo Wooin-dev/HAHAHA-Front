@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import QuizThumb from "../components/QuizThumb";
 import ReplyOne from "../components/ReplyOne";
@@ -20,14 +20,21 @@ function QuizOne() {
 
     const userInfoLocal = JSON.parse(localStorage.getItem('user-info'));
 
+    const modifiedQuiz = useLocation().state;
+
     //데이터 가져오기
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/quizzes/${id}`).then(res => {
-            setQuiz(res.data)
-            setReplies(res.data.replies);
-        }).catch(error => {
-            alert(error)
-        })
+        if (modifiedQuiz !== null) {
+            setQuiz(modifiedQuiz);
+            setReplies(modifiedQuiz.replies);
+        } else {
+            axios.get(`http://localhost:8080/api/quizzes/${id}`).then(res => {
+                setQuiz(res.data)
+                setReplies(res.data.replies);
+            }).catch(error => {
+                alert(error)
+            })
+        }
     }, [])
 
     const clickShowHint = () => {
@@ -48,14 +55,18 @@ function QuizOne() {
         })
     }
     const deleteQuiz = () => {
-        axios.delete(`http://localhost:8080/api/quizzes/${id}`, {
-            withCredentials: true
-        }).then(() => {
-            navigate('/quizzes');
-        }).catch(error => {
-            console.log(error);
-            navigate('/quizzes');
-        })
+
+        const result = window.confirm("선택한 유-우머를 삭제하시겠습니까?");
+        if (result) {
+            axios.delete(`http://localhost:8080/api/quizzes/${id}`, {
+                withCredentials: true
+            }).then(() => {
+                navigate('/quizzes');
+            }).catch(error => {
+                console.log(error);
+                navigate('/quizzes');
+            })
+        }
     };
 
     const submitReplyHandler = (writingReply) => {
@@ -96,7 +107,7 @@ function QuizOne() {
             <div className="border-2 p-5">
                 <div className=" mb-2 flex justify-between">
                     <div className="text-xs"> Quiz. {id} </div>
-                    <div className="text-sm mr-4"> <span className="text-xs">by.</span> {quiz.author} </div>
+                    <div className="text-sm mr-4"><span className="text-xs">by.</span> {quiz.author} </div>
                 </div>
                 <div id='quiz-title'
                      className="text-3xl mb-4">
