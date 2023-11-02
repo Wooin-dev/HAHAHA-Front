@@ -5,7 +5,7 @@ import React from "react";
 const Pagination = ({startPage, setStartPage, currentPage, setCurrentPage, totalPages, onPageChange}) => {
     let pageNumbers = []; // pageNumbers를 let으로 변경
 
-    const maxVisibleButtons = 3;
+    const maxVisibleButtons = 5;
 
     const renderPageNumbers = () => {
         pageNumbers = []; // 페이지 렌더링 전에 배열을 초기화
@@ -42,14 +42,14 @@ const Pagination = ({startPage, setStartPage, currentPage, setCurrentPage, total
     return (
         <div className="flex mt-4 items-center">
             {startPage > 1 && (
-                <button className="px-3 py-1 mx-1 bg-white text-blue-500 border border-blue-500 rounded-md"
+                <button className="px-2 py-1 mx-4 bg-gray-700 text-sm text-white rounded-md"
                         onClick={handlePrev}>
                     이전
                 </button>
             )}
             {renderPageNumbers()}
             {startPage + maxVisibleButtons - 1 < totalPages && (
-                <button className="px-3 py-1 mx-1 bg-white text-blue-500 border border-blue-500 rounded-md"
+                <button className="px-2 py-1 mx-4 bg-gray-700 text-sm text-white rounded-md"
                         onClick={handleNext}>
                     다음
                 </button>
