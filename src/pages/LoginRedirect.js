@@ -24,7 +24,7 @@ const LoginRedirect = () => {
             console.log("로그인 완료");
             localStorage.setItem('user-info', JSON.stringify(res.data));
 
-            // window.location.href='/'
+            window.location.href = '/foohaha'
             }).catch(err => {
                 console.log(`카카오 로그인 Error : ${err}`);
             });

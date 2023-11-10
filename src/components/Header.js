@@ -5,7 +5,7 @@ import {isLoginSelector, UserInfoAtom} from "../recoil/loginState";
 import {removeCookie} from "../util/cookie";
 import {KAKAO_AUTH_URL} from "../constants/OAuth";
 
-// import kakaoLoginBtnImg from './src_assets/kakao_login_medium_wide.png';
+import kakaoLoginBtnImg from './img/kakao_login_medium_wide.png';
 
 export default function Header() {
 
@@ -23,7 +23,7 @@ export default function Header() {
         setUserInfo(undefined);
         localStorage.removeItem('user-info');
 
-        window.location.href = "/";
+        window.location.href = "/foohaha";
         // navigate('/');
     }
     const handleOpenModal = () => {
@@ -58,7 +58,7 @@ export default function Header() {
                         </div>
                         <div className="">
                             <img className="mx-auto mt-7 mb-5 cursor-pointer"
-                                 src="/img/kakao_login_medium_wide.png" alt="카카오로 로그인하기"
+                                 src={kakaoLoginBtnImg} alt="카카오로 로그인하기"
                                  onClick={(e) => {
                                      e.preventDefault();
                                      window.location.href = KAKAO_AUTH_URL;

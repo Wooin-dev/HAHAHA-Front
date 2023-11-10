@@ -16,7 +16,7 @@ function QuizRequest(props) {
 
     function createQuizOnList() {
 
-        axios.post(`${API_QUIZ_BASE}/`, {
+        axios.post(`${API_QUIZ_BASE}`, {
             question: question,
             hint: hint,
             answer: answer,

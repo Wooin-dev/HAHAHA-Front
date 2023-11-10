@@ -35,7 +35,7 @@ export default function Mypage() {
                     if (res.status.valueOf() === 200) {
                         alert('수정완료');
                     }
-                    window.location.href = "/my-page";
+                    window.location.href = "/foohaha/my-page";
                 })
         }
 
