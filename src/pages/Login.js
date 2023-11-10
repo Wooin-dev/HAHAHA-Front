@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {KAKAO_AUTH_URL} from "../components/OAuth";
+import {KAKAO_AUTH_URL} from "../constants/OAuth";
 import {useRecoilState} from "recoil";
 import {UserInfoAtom} from "../recoil/loginState";
+import {API_USERS_BASE} from "../constants/uri";
 
 function Login() {
 
@@ -16,7 +17,7 @@ function Login() {
 
 
     function loginBtnHandler() {
-        axios.post('http://localhost:8080/api/users/login', {
+        axios.post(`${API_USERS_BASE}/login`, {
             username: id,
             password: pwd
         }, {

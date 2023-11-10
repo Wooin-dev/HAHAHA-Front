@@ -1,5 +1,4 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./pages/Home";
 import QuizListPage from "./pages/QuizListPage/QuizListPage";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
@@ -14,7 +13,6 @@ import LoginRedirect from "./pages/LoginRedirect";
 import {useEffect} from "react";
 import {useRecoilState} from "recoil";
 import {UserInfoAtom} from "./recoil/loginState";
-import {getCookie} from "./util/cookie";
 
 function App() {
 
@@ -24,11 +22,16 @@ function App() {
 
     useEffect(() => {
 
-        const cookie = getCookie('Authorization');
+        // const cookie = getCookie("Authorization");
+        const cookie = localStorage.getItem('uesr-info');
 
-        if (cookie===undefined) {
-            console.log('Authorization 쿠키가 없다')
-            localStorage.removeItem('user-info');
+        console.log("cookie값 :");
+        console.log(cookie);
+
+        if (cookie === undefined) {
+            console.log('Authorization 쿠키가 없다');
+            console.log("user-info 삭제");
+            // localStorage.removeItem('user-info');
 
         } else {
             console.log('Authorization 쿠키가 있다')

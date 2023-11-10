@@ -2,10 +2,10 @@ import React from 'react';
 
 function Title(props) {
     return (
-        <div className="p-5 text-center">
+        <div className="p-5 text-center mb-5">
             <h1 className="
             text-4xl font-bold
-            m-auto my-3
+            m-auto my-5
             ">
                 {props.title}
             </h1>

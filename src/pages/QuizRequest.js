@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import {useNavigate, RedirectFunction} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Title from "../components/Title";
+import {API_QUIZ_BASE} from "../constants/uri";
 
 function QuizRequest(props) {
 
@@ -15,7 +16,7 @@ function QuizRequest(props) {
 
     function createQuizOnList() {
 
-        axios.post('http://localhost:8080/api/quizzes', {
+        axios.post(`${API_QUIZ_BASE}/`, {
             question: question,
             hint: hint,
             answer: answer,

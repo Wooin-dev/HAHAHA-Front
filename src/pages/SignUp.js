@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {API_USERS_BASE} from "../constants/uri";
 
 function SignUp() {
 
     const navigate = useNavigate();
 
     function signupSubmit(_id, _pwd, _email, _nickname) {
-        axios.post('http://localhost:8080/api/users/signup', {
+        axios.post(`${API_USERS_BASE}/signup`, {
             username: _id,
             password: _pwd,
             email: _email,

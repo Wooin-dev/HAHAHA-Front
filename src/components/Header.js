@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useRecoilState} from "recoil";
 import {isLoginSelector, UserInfoAtom} from "../recoil/loginState";
 import {removeCookie} from "../util/cookie";
-import {KAKAO_AUTH_URL} from "./OAuth";
+import {KAKAO_AUTH_URL} from "../constants/OAuth";
 
 // import kakaoLoginBtnImg from './src_assets/kakao_login_medium_wide.png';
 
@@ -11,7 +11,6 @@ export default function Header() {
 
     const [isLogin, setIsLogin] = useRecoilState(isLoginSelector);
     const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
-    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
 
     const logoutHandler = (e) => {
@@ -34,14 +33,14 @@ export default function Header() {
         setShowModal(false);
     };
     const LoginModalContents = ({handleClose, show}) => {
-        const showHideClassName = show ? "modal fixed w-full h-full top-0 left-0 flex items-center justify-center" : "modal hidden";
+        const showHideClassName = show ? "modal fixed w-full h-full top-0 left-0 z-40 flex items-center justify-center" : "modal hidden";
 
         return (
             <div className={showHideClassName}>
-                <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+                <div className="modal-overlay absolute w-full h-full  bg-gray-900 opacity-50"
                      onClick={handleClose}></div>
                 <div
-                    className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                    className="modal-container bg-white w-11/12 md:max-w-md mx-auto z-50 rounded shadow-lg overflow-y-auto">
                     <div className="modal-content py-4 text-left px-6 relative">
                         <div>
                             <h2 className="text-2xl font-bold text-center my-5">로그인</h2>
@@ -101,8 +100,8 @@ export default function Header() {
             <div className="flex items-center">
                 <Link className="text-xl font-bold ml-10 whitespace-nowrap flex-shrink-0" to="/">푸하하</Link>
                 <nav className="ml-10 space-x-4 whitespace-nowrap flex-shrink-0">
-                    <Link to="/quizzes" className="hover:text-gray-400">유-우머들</Link>
-                    <Link to="/rank" className="hover:text-gray-400">아재왕</Link>
+                    <Link to="/quizzes" className="hover:text-gray-400">유-우머</Link>
+                    {/*<Link to="/rank" className="hover:text-gray-400">아재왕</Link>*/}
                 </nav>
             </div>
             <LoginOutNav/>

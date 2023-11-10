@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import QuizThumb from "../components/QuizThumb";
 import ReplyOne from "../components/ReplyOne";
 import ReplySubmit from "../components/ReplySubmit";
+import {API_QUIZ_BASE} from "../constants/uri";
 
 function QuizOne() {
 
@@ -28,7 +28,8 @@ function QuizOne() {
             setQuiz(modifiedQuiz);
             setReplies(modifiedQuiz.replies);
         } else {
-            axios.get(`http://localhost:8080/api/quizzes/${id}`).then(res => {
+            axios.get(`${API_QUIZ_BASE}/${id}`).then(res => {
+                console.log(API_QUIZ_BASE);
                 setQuiz(res.data)
                 setReplies(res.data.replies);
             }).catch(error => {
@@ -58,7 +59,7 @@ function QuizOne() {
 
         const result = window.confirm("선택한 유-우머를 삭제하시겠습니까?");
         if (result) {
-            axios.delete(`http://localhost:8080/api/quizzes/${id}`, {
+            axios.delete(`${API_QUIZ_BASE}/${id}`, {
                 withCredentials: true
             }).then(() => {
                 navigate('/quizzes');
@@ -71,7 +72,7 @@ function QuizOne() {
 
     const submitReplyHandler = (writingReply) => {
 
-        axios.post(`http://localhost:8080/api/quizzes/${id}/replies`,
+        axios.post(`${API_QUIZ_BASE}/${id}/replies`,
             {
                 contents: writingReply,
             }, {
@@ -88,18 +89,22 @@ function QuizOne() {
     }
 
     const BtnRow = () => {
-        return (
-            <div id="btns"
-                 className="space-x-2 flex justify-end">
+        if (userInfoLocal) {
+            if (userInfoLocal.id === quiz.authorId) {
+                return (
+                    <div id="btns"
+                         className="space-x-2 flex justify-end">
 
-                <button onClick={goToModify}
-                        className="text-xs p-1.5 bg-gray-500 text-white rounded-xl">수정
-                </button>
-                <button onClick={deleteQuiz}
-                        className="text-xs p-1 border-[1px] border-gray-400 text-gray-400 rounded-xl">삭제
-                </button>
-            </div>
-        )
+                        <button onClick={goToModify}
+                                className="text-xs p-1.5 bg-gray-500 text-white rounded-xl">수정
+                        </button>
+                        <button onClick={deleteQuiz}
+                                className="text-xs p-1 border-[1px] border-gray-400 text-gray-400 rounded-xl">삭제
+                        </button>
+                    </div>
+                )
+            }
+        }
     }
 
     return (
@@ -155,13 +160,12 @@ function QuizOne() {
                          className="flex flex-col items-center">
                         {solved && <div className="py-7 mt-2 text-center">
                             <p className="text-sm font-bold ml-2">왜냐하면~</p>
-                            <div>{quiz.description}</div>
+                            <div className="mx-3">{quiz.description}</div>
                         </div>}
                     </div>
                 </div>
-                {userInfoLocal.id === quiz.authorId && (
-                    <BtnRow/>
-                )}
+                <BtnRow/>
+
 
             </div>
 

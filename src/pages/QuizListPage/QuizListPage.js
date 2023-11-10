@@ -5,6 +5,7 @@ import axios from "axios";
 import PageBtnRow from "./Components/PageBtnRow";
 import Title from "../../components/Title";
 import UtilBtnLine from "./Components/UtilBtnLine";
+import {API_QUIZ_BASE} from "../../constants/uri";
 
 export default function QuizListPage() {
 
@@ -14,7 +15,7 @@ export default function QuizListPage() {
     const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수입니다. 적절히 조정해야 합니다.
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/quizzes', {
+        axios.get(`${API_QUIZ_BASE}`, {
             params: {
                 page: currentPage,
                 size: 10,
@@ -54,7 +55,7 @@ export default function QuizListPage() {
 
     return (
         <div>
-            <Title title="유-우머"/>
+            <Title title="유-우머" subtitle="부장님의 입꼬리가 씰룩거리는 이유"/>
             <div className="w-[650px] m-auto space-y-4">
                 <UtilBtnLine/>
                 <QuizListSection/>

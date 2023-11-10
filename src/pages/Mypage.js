@@ -1,19 +1,15 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {API_MYPAGE_BASE} from "../constants/uri";
 
 export default function Mypage() {
 
     const [myProfile, setMyProfile] = useState({});
     const [editMode, setEditMode] = useState(false);
 
-    const navigate = useNavigate();
-
-
-    console.log('mypage render');
     useEffect(() => {
 
-        axios.get("http://localhost:8080/api/my-page/my-profile",
+        axios.get(`${API_MYPAGE_BASE}/my-profile`,
             {withCredentials: true})
             .then(res => {
                 setMyProfile(res.data);
@@ -31,7 +27,7 @@ export default function Mypage() {
                 nickname: nickname,
             }
 
-            axios.put("http://localhost:8080/api/my-page/edit-profile",
+            axios.put(`${API_MYPAGE_BASE}/edit-profile`,
                 requestDto, {
                     withCredentials: true,
                 })
@@ -39,7 +35,7 @@ export default function Mypage() {
                     if (res.status.valueOf() === 200) {
                         alert('수정완료');
                     }
-                    window.location.href="/my-page";
+                    window.location.href = "/my-page";
                 })
         }
 
@@ -119,21 +115,23 @@ export default function Mypage() {
 
                 <div id="contents-mypage"
                      className="w-full">
-
-                    <div id="my-stastics"
-                         className="flex justify-center space-x-2 my-20">
-                        <div className="text-center w-[150px]">
-                            <p className="text-3xl my-2">0</p>
-                            <p className="text-sm font-bold">도전한 퀴즈 수</p>
+                    <div className="my-20">
+                        <div id="my-stastics"
+                             className="flex justify-center space-x-2 ">
+                            <div className="text-center w-[150px]">
+                                <p className="text-3xl my-2">?</p>
+                                <p className="text-sm font-bold">??? 퀴즈 수</p>
+                            </div>
+                            <div className="text-center w-[150px]">
+                                <p className="text-3xl my-2">?</p>
+                                <p className="text-sm font-bold">?? 퀴즈 수</p>
+                            </div>
+                            <div className="text-center w-[150px]">
+                                <p className="text-3xl my-2">{myProfile.createdQuizCnt}</p>
+                                <p className="text-sm font-bold">만든 퀴즈 수</p>
+                            </div>
                         </div>
-                        <div className="text-center w-[150px]">
-                            <p className="text-3xl my-2">0</p>
-                            <p className="text-sm font-bold">풀은 퀴즈 수</p>
-                        </div>
-                        <div className="text-center w-[150px]">
-                            <p className="text-3xl my-2">{myProfile.createdQuizCnt}</p>
-                            <p className="text-sm font-bold">만든 퀴즈 수</p>
-                        </div>
+                        {/*<div className="text-center mt-2 text-xs">(준비중)</div>*/}
                     </div>
 
 

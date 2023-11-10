@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from "axios";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import Title from "../components/Title";
+import {API_QUIZ_BASE} from "../constants/uri";
 
 function QuizModify() {
 
@@ -26,7 +27,7 @@ function QuizModify() {
         modifiedQuiz.answer = answer;
         modifiedQuiz.description = description;
 
-        axios.put(`http://localhost:8080/api/quizzes/${id}`, modifiedQuiz, {
+        axios.put(`${API_QUIZ_BASE}/${id}`, modifiedQuiz, {
             withCredentials: true
         })
             .then((res) => {
