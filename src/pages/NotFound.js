@@ -12,15 +12,12 @@ export default function NotFound() {
                 fontSize: '48px',
                 fontWeight: 'bold',
                 marginBottom: '35px'
-            }}>해당 페이지를 찾지 못했습니다.</div>
-            <div
-                onClick={()=> navigate('/')}
-                style={{
-                fontSize: '32px',
-                lineHeight: '1.6',
-                color: 'red',
-                cursor: 'pointer'
-            }}>메인 페이지로 이동</div>
+            }}>해당 페이지를 찾지 못했습니다.
+            </div>
+            <div className="mx-10 text-3xl border-2 w-fit p-2 cursor-pointer rounded-2xl"
+                 onClick={() => navigate('/')}
+            >메인 페이지로 이동
+            </div>
         </div>
     )
 }
