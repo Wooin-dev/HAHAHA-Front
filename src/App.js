@@ -17,7 +17,6 @@ import {UserInfoAtom} from "./recoil/loginState";
 function App() {
 
     console.log('App 컴포넌트 실행');
-
     const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
 
     useEffect(() => {
@@ -43,8 +42,6 @@ function App() {
             console.log(userInfo);
         }
     }, [])
-
-    // const topUri = "/foohaha";
 
     return (
         <div className="w-[1000px] m-auto pb-10">
