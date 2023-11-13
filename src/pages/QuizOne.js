@@ -183,6 +183,7 @@ function QuizOne() {
                                 <ReplyOne key={reply['id']}
                                           contents={reply['contents']}
                                           author={reply['author']}
+                                          authorId={reply['authorId']}
                                           createdAt={reply['createdAt']}
                                 />
                             )
