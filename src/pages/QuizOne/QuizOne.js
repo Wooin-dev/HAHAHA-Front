@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import ReplyOne from "../components/ReplyOne";
-import ReplySubmit from "../components/ReplySubmit";
-import {API_QUIZ_BASE} from "../constants/uri";
+import ReplyOne from "./ReplyOne";
+import ReplySubmit from "./ReplySubmit";
+import {API_QUIZ_BASE, API_REPLY_BASE} from "../../constants/uri";
 
 function QuizOne() {
 
@@ -88,6 +88,29 @@ function QuizOne() {
         setReplies(updatedReplies);
     }
 
+    const deleteReply = (replyId) => {
+
+        const result = window.confirm("선택한 댓글을 삭제하시겠습니까?");
+        if (result) {
+            axios.delete(`${API_REPLY_BASE}/${replyId}`, {
+                withCredentials: true
+            }).then(() => {
+                const newReplies = []
+                replies.map(reply => {
+                    if (reply.id !== replyId) {
+                        newReplies.push(reply);
+                    }
+                });
+                setReplies(newReplies);
+            }).catch(error => {
+                console.log(error);
+            })
+        }
+
+
+    }
+
+
     const BtnRow = () => {
         if (userInfoLocal) {
             if (userInfoLocal.id === quiz.authorId) {
@@ -142,7 +165,6 @@ function QuizOne() {
                                 onKeyDown={e => {
                                     if (e.key === 'Enter') {
                                         checkAnswer();
-                                        console.log('Enter키 쳤다!');
                                     }
                                 }}
                                 onChange={(e) => {
@@ -165,8 +187,6 @@ function QuizOne() {
                     </div>
                 </div>
                 <BtnRow/>
-
-
             </div>
 
             <div id='quiz-reply-container'
@@ -180,11 +200,12 @@ function QuizOne() {
                     {
                         replies.map(reply => {
                             return (
-                                <ReplyOne key={reply['id']}
+                                <ReplyOne id={reply['id']}
                                           contents={reply['contents']}
                                           author={reply['author']}
                                           authorId={reply['authorId']}
                                           createdAt={reply['createdAt']}
+                                          deleteOnClick={deleteReply}
                                 />
                             )
                         })

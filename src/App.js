@@ -4,7 +4,7 @@ import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 import Mypage from "./pages/Mypage";
 import Rank from "./pages/Rank";
-import QuizOne from "./pages/QuizOne";
+import QuizOne from "./pages/QuizOne/QuizOne";
 import QuizRequest from "./pages/QuizRequest";
 import QuizModify from "./pages/QuizModify";
 import Login from "./pages/Login";
