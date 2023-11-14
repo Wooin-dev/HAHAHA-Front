@@ -1,11 +1,18 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import {useRecoilValue} from "recoil";
+import {isLoginSelector} from "../../../recoil/loginState";
 
 function QuizCreateButton() {
 
     const navigate = useNavigate();
+    const isLogin = useRecoilValue(isLoginSelector);
     const onClickQuizCreate = () => {
-        navigate(`/quizzes/create`)
+        if (isLogin) {
+            navigate(`/quizzes/create`);
+        } else {
+            alert("로그인이 필요합니다.");
+        }
     }
 
 
