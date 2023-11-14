@@ -4,7 +4,7 @@ import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 import Mypage from "./pages/Mypage";
 import Rank from "./pages/Rank";
-import QuizOne from "./pages/QuizOne";
+import QuizOne from "./pages/QuizOne/QuizOne";
 import QuizRequest from "./pages/QuizRequest";
 import QuizModify from "./pages/QuizModify";
 import Login from "./pages/Login";
@@ -17,7 +17,6 @@ import {UserInfoAtom} from "./recoil/loginState";
 function App() {
 
     console.log('App 컴포넌트 실행');
-
     const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
 
     useEffect(() => {
@@ -43,8 +42,6 @@ function App() {
             console.log(userInfo);
         }
     }, [])
-
-    // const topUri = "/foohaha";
 
     return (
         <div className="w-[1000px] m-auto pb-10">

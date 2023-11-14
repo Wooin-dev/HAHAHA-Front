@@ -8,7 +8,6 @@ import UtilBtnLine from "./Components/UtilBtnLine";
 import {API_QUIZ_BASE} from "../../constants/uri";
 
 export default function QuizListPage() {
-
     const [quizzes, setQuizzes] = useState([]);
     const [startPage, setStartPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호를 상태로 관리합니다.
