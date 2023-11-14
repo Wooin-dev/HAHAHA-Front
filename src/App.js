@@ -13,6 +13,7 @@ import LoginRedirect from "./pages/LoginRedirect";
 import {useEffect} from "react";
 import {useRecoilState} from "recoil";
 import {UserInfoAtom} from "./recoil/loginState";
+import ProtectedRoute from "./Routes/ProtectedRoute";
 
 function App() {
 
@@ -53,14 +54,17 @@ function App() {
                     <Route path="/" element={<QuizListPage/>}/>
                     <Route path="/quizzes" element={<QuizListPage/>}/>
                     <Route path="/quizzes/:id" element={<QuizOne/>}/>
-                    <Route path="/quizzes/create" element={<QuizRequest/>}/>
-                    <Route path="/quizzes/modify/:id" element={<QuizModify/>}/>
                     <Route path="/rank" element={<Rank/>}/>
-                    <Route path="/my-page" element={<Mypage/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/api/users/kakao/callback" element={<LoginRedirect/>}/>
                     <Route path="/sign-up" element={<SignUp/>}/>
                     <Route path="/*" element={<NotFound/>}/>
+                    {/*  유저 전용 페이지  */}
+                    <Route element={<ProtectedRoute/>}>
+                        <Route path="/quizzes/create" element={<QuizRequest/>}/>
+                        <Route path="/quizzes/modify/:id" element={<QuizModify/>}/>
+                        <Route path="/my-page" element={<Mypage/>}/>
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </div>
