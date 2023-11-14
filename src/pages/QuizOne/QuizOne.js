@@ -29,7 +29,6 @@ function QuizOne() {
             setReplies(modifiedQuiz.replies);
         } else {
             axios.get(`${API_QUIZ_BASE}/${id}`).then(res => {
-                console.log(API_QUIZ_BASE);
                 setQuiz(res.data)
                 setReplies(res.data.replies);
             }).catch(error => {
@@ -200,7 +199,8 @@ function QuizOne() {
                     {
                         replies.map(reply => {
                             return (
-                                <ReplyOne id={reply['id']}
+                                <ReplyOne key={reply['id']}
+                                          id={reply['id']}
                                           contents={reply['contents']}
                                           author={reply['author']}
                                           authorId={reply['authorId']}
