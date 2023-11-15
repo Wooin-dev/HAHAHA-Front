@@ -48,7 +48,7 @@ function QuizOne() {
             })
                 .then(res => {
                     setIsLiked(res.data);
-                    console.log(res.data);
+                    // console.log(res.data);
                 });
         }
 
@@ -128,13 +128,11 @@ function QuizOne() {
     const clickLikeHandler = () => {
 
         if (isLogin) {
-
             if (isLiked) {
                 cancleLike();
             } else {
                 hitLike();
             }
-
         } else {
             alert("로그인이 필요한 기능입니다.");
         }
@@ -260,6 +258,7 @@ function QuizOne() {
                                           author={reply['author']}
                                           authorId={reply['authorId']}
                                           createdAt={reply['createdAt']}
+                                          likesCnt={reply['likesCnt']}
                                           deleteOnClick={deleteReply}
                                 />
                             )
