@@ -8,5 +8,4 @@ export const isLoginSelector = selector({
 export const UserInfoAtom = atom({
     key: 'UserInfoAtom',
     default: undefined,
-    // effects_UNSTABLE: [persistAtom]
 });

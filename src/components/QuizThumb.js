@@ -19,8 +19,13 @@ export default function QuizThumb(props) {
                 <div className="text-md font-bold">
                     <p className="truncate">{props.quiz.question}</p>
                 </div>
-                <div className="text-xs pt-2">
-                    댓글 {props.quiz.cntReplies}
+                <div className="flex text-xs text-gray-500 pt-2 space-x-2">
+                    <div>
+                        푸하하 {props.quiz.cntLikes}
+                    </div>
+                    <div>
+                        댓글 {props.quiz.cntReplies}
+                    </div>
                 </div>
             </div>
         );
