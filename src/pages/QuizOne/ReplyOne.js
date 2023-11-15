@@ -50,7 +50,7 @@ function ReplyOne(props) {
         return (
             <>
                 {userInfo && props.authorId === userInfo.id && (
-                    <div className="bg-green-200 text-xs underline text-gray-400 flex space-x-2 items-center">
+                    <div className="text-xs underline text-gray-400 flex space-x-2 items-center">
                         <button onClick={() => setModifyMode(true)}>
                             수정 {modifyMode && "수정모드"}
                         </button>

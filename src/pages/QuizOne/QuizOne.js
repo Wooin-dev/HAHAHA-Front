@@ -3,7 +3,10 @@ import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import ReplyOne from "./ReplyOne";
 import ReplySubmit from "./ReplySubmit";
-import {API_QUIZ_BASE, API_REPLY_BASE} from "../../constants/uri";
+import {API_LIKE_BASE, API_QUIZ_BASE, API_REPLY_BASE} from "../../constants/uri";
+import HeartLike from "./heartLike";
+import {useRecoilValue} from "recoil";
+import {isLoginSelector} from "../../recoil/loginState";
 
 function QuizOne() {
 
@@ -17,6 +20,9 @@ function QuizOne() {
     const [answerIn, setAnswerIn] = useState('');
     const [showHint, setShowHint] = useState(false);
     const [solved, setSolved] = useState(false);
+    const isLogin = useRecoilValue(isLoginSelector);
+
+    const [isLiked, setIsLiked] = useState(false);
 
     const userInfoLocal = JSON.parse(localStorage.getItem('user-info'));
 
@@ -33,9 +39,21 @@ function QuizOne() {
                 setReplies(res.data.replies);
             }).catch(error => {
                 alert(error)
-            })
+            });
         }
-    }, [])
+
+        if (isLogin) {
+            axios.get(`${API_LIKE_BASE}/quizzes/is-liked/${id}`, {
+                withCredentials: true
+            })
+                .then(res => {
+                    setIsLiked(res.data);
+                    console.log(res.data);
+                });
+        }
+
+
+    }, [isLogin]);
 
     const clickShowHint = () => {
         setShowHint(true);
@@ -105,10 +123,46 @@ function QuizOne() {
                 console.log(error);
             })
         }
-
-
     }
 
+    const clickLikeHandler = () => {
+
+        if (isLogin) {
+
+            if (isLiked) {
+                cancleLike();
+            } else {
+                hitLike();
+            }
+
+        } else {
+            alert("로그인이 필요한 기능입니다.");
+        }
+    }
+
+    const hitLike = () => {
+        axios.get(`${API_LIKE_BASE}/quizzes/${id}`, {
+            withCredentials: true
+        }).then(res => {
+            console.log(res.data);
+            setIsLiked(true);
+            quiz.likesCnt += 1;
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    const cancleLike = () => {
+        axios.delete(`${API_LIKE_BASE}/quizzes/${id}`, {
+            withCredentials: true
+        }).then(res => {
+            console.log(res.data);
+            setIsLiked(false);
+            quiz.likesCnt -= 1;
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
     const BtnRow = () => {
         if (userInfoLocal) {
@@ -185,6 +239,7 @@ function QuizOne() {
                         </div>}
                     </div>
                 </div>
+                <HeartLike isLiked={isLiked} likeCnt={quiz.likesCnt} onClickHandler={clickLikeHandler}/>
                 <BtnRow/>
             </div>
 

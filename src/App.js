@@ -11,19 +11,20 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import LoginRedirect from "./pages/LoginRedirect";
 import {useEffect} from "react";
-import {useRecoilState} from "recoil";
-import {UserInfoAtom} from "./recoil/loginState";
+import {useRecoilState, useRecoilValue} from "recoil";
+import {isLoginSelector, UserInfoAtom} from "./recoil/loginState";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 
 function App() {
 
     console.log('App 컴포넌트 실행');
     const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
+    const isLogin = useRecoilValue(isLoginSelector);
 
     useEffect(() => {
 
         // const cookie = getCookie("Authorization");
-        const cookie = localStorage.getItem('uesr-info');
+        const cookie = localStorage.getItem('user-info');
 
         console.log("cookie값 :");
         console.log(cookie);
@@ -43,6 +44,12 @@ function App() {
             console.log(userInfo);
         }
     }, [])
+
+    useEffect(() => {
+        console.log("userInfo 출력");
+        console.log(userInfo);
+        console.log(isLogin ? "로그인" : "로그오프");
+    }, [userInfo])
 
     return (
         <div className="w-[1000px] m-auto pb-10">
