@@ -208,7 +208,7 @@ function QuizOne() {
 
     const DevStatus = () => {
         return (
-            <div>
+            <div className={`${process.env.REACT_APP_TRUE_ONLY_ON_LOCAL !== "true" && "hidden"}`}>
                 {JSON.stringify(quizUserData)}
             </div>
         )

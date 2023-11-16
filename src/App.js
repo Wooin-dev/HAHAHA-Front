@@ -40,7 +40,8 @@ function App() {
 
     const DevTools = () => {
         return (
-            <div className="space-y-2 text-xs m-2">
+            <div
+                className={`space-y-2 text-xs m-2 ${process.env.REACT_APP_TRUE_ONLY_ON_LOCAL === "false" && "hidden"}`}>
                 <div className="border-2 flex space-x-4 w-fit">
                     <div>쿠키 체크 : {getCookie("Authorization") && "Exist"}</div>
                     <div>로그인 상태 : {isLogin ? "On" : "Off"}</div>
