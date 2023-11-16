@@ -75,8 +75,8 @@ export default function Header() {
             isLogin
                 ?
                 <div className="text-sm text-gray-600 ml-auto mr-5 space-x-4 flex">
-                    <div className="">
-                        {isLogin && userInfo.nickname}님 안녕하세요.
+                    <div className="font-bold">
+                        &#128518; {isLogin && userInfo.nickname}
                     </div>
                     <Link className=""
                           to={"/my-page"}>
