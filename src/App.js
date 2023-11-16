@@ -14,6 +14,7 @@ import {useEffect} from "react";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {isLoginSelector, UserInfoAtom} from "./recoil/loginState";
 import ProtectedRoute from "./Routes/ProtectedRoute";
+import {getCookie} from "./util/cookie";
 
 function App() {
 
@@ -23,39 +24,40 @@ function App() {
 
     useEffect(() => {
 
-        // const cookie = getCookie("Authorization");
-        const cookie = localStorage.getItem('user-info');
+        const cookie = getCookie("Authorization");
 
         console.log("cookie값 :");
         console.log(cookie);
 
         if (cookie === undefined) {
-            console.log('Authorization 쿠키가 없다');
-            console.log("user-info 삭제");
-            // localStorage.removeItem('user-info');
-
+            localStorage.removeItem('user-info');
         } else {
-            console.log('Authorization 쿠키가 있다')
             const storedUserInfo = localStorage.getItem('user-info');
             const parsedUserInfoJson = JSON.parse(storedUserInfo);
             setUserInfo(parsedUserInfoJson);
-
-            console.log('userInfo Set완료 : ')
-            console.log(userInfo);
         }
     }, [])
 
-    useEffect(() => {
-        console.log("userInfo 출력");
-        console.log(userInfo);
-        console.log(isLogin ? "로그인" : "로그오프");
-    }, [userInfo])
+    const DevTools = () => {
+        return (
+            <div className="space-y-2 text-xs m-2">
+                <div className="border-2 flex space-x-4 w-fit">
+                    <div>쿠키 체크 : {getCookie("Authorization") && "Exist"}</div>
+                    <div>로그인 상태 : {isLogin ? "On" : "Off"}</div>
+                </div>
+                <div className="border-2">user-info : {JSON.stringify(userInfo)}</div>
+
+
+            </div>
+        )
+    }
 
     return (
         <div className="w-[1000px] m-auto pb-10">
             <BrowserRouter basename="/foohaha">
                 {/*Routes 영향 받지 않는 페이지는 태그 바깥으로*/}
                 <Header/>
+                <DevTools/>
                 <Routes>
                     {/*<Route path="/" element={<Home/>}/>*/}
                     <Route path="/" element={<QuizListPage/>}/>
