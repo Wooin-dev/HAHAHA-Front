@@ -117,14 +117,18 @@ export default function Mypage() {
                      className="w-full">
                     <div className="my-20">
                         <div id="my-stastics"
-                             className="flex justify-center space-x-2 ">
+                             className="flex justify-center ">
                             <div className="text-center w-[150px]">
-                                <p className="text-3xl my-2">?</p>
-                                <p className="text-sm font-bold">??? 퀴즈 수</p>
+                                <p className="text-3xl my-2">{myProfile.showQuizCnt}</p>
+                                <p className="text-sm font-bold">도전한 유-우머</p>
                             </div>
                             <div className="text-center w-[150px]">
-                                <p className="text-3xl my-2">?</p>
-                                <p className="text-sm font-bold">?? 퀴즈 수</p>
+                                <p className="text-3xl my-2">{myProfile.showHintCnt}</p>
+                                <p className="text-sm font-bold">힌트를 본 유-우머</p>
+                            </div>
+                            <div className="text-center w-[150px]">
+                                <p className="text-3xl my-2">{myProfile.solveQuizCnt}</p>
+                                <p className="text-sm font-bold">맞춘 유-우머</p>
                             </div>
                             <div className="text-center w-[150px]">
                                 <p className="text-3xl my-2">{myProfile.createdQuizCnt}</p>

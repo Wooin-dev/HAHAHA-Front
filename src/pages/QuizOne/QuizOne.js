@@ -3,7 +3,7 @@ import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import ReplyOne from "./ReplyOne";
 import ReplySubmit from "./ReplySubmit";
-import {API_LIKE_BASE, API_QUIZ_BASE, API_REPLY_BASE} from "../../constants/uri";
+import {API_LIKE_BASE, API_QUIZ_BASE, API_QUIZ_USER_DATA_BASE, API_REPLY_BASE} from "../../constants/uri";
 import HeartLike from "./heartLike";
 import {useRecoilValue} from "recoil";
 import {isLoginSelector} from "../../recoil/loginState";
@@ -13,23 +13,24 @@ function QuizOne() {
     const navigate = useNavigate();
 
     const {id} = useParams();
-    const [quiz, setQuiz] = useState({});
-    const [replies, setReplies] = useState([]);
-    const answer = quiz.answer;
+    const modifiedQuiz = useLocation().state;
 
-    const [answerIn, setAnswerIn] = useState('');
-    const [showHint, setShowHint] = useState(false);
-    const [solved, setSolved] = useState(false);
     const isLogin = useRecoilValue(isLoginSelector);
 
+    const [quiz, setQuiz] = useState({});
+    const [replies, setReplies] = useState([]);
+    const [quizUserData, setQuizUserData] = useState({});
+    const [showHint, setShowHint] = useState(false);
+    const [solved, setSolved] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
+    const [answerIn, setAnswerIn] = useState('');
 
     const userInfoLocal = JSON.parse(localStorage.getItem('user-info'));
 
-    const modifiedQuiz = useLocation().state;
 
     //데이터 가져오기
     useEffect(() => {
+
         if (modifiedQuiz !== null) {
             setQuiz(modifiedQuiz);
             setReplies(modifiedQuiz.replies);
@@ -48,21 +49,47 @@ function QuizOne() {
             })
                 .then(res => {
                     setIsLiked(res.data);
-                    // console.log(res.data);
                 });
-        }
 
+            axios.get(`${API_QUIZ_USER_DATA_BASE}/show-quiz/${id}`, {
+                withCredentials: true
+            }).then(res => {
+                setQuizUserData(res.data);
+            })
+        }
 
     }, [isLogin]);
 
+
+    useEffect(() => {
+        if (quizUserData.isShowHint) setShowHint(true);
+    }, [quizUserData])
+
     const clickShowHint = () => {
         setShowHint(true);
+
+        if (isLogin && !quizUserData.isShowHint) {
+            axios.get(`${API_QUIZ_USER_DATA_BASE}/show-hint/${id}`, {
+                withCredentials: true
+            }).then(res => {
+                console.log(res);
+            }).catch(err => console.log(err));
+        }
     }
 
     const checkAnswer = () => {
-        if (answerIn === answer) {
-            alert(`정답 ${answer}`)
+        if (answerIn === quiz.answer) {
+            alert(`정답 ${quiz.answer}`)
             setSolved(true);
+
+            if (isLogin && !quizUserData.isSolved) {
+                axios.get(`${API_QUIZ_USER_DATA_BASE}/solve-quiz/${id}`, {
+                    withCredentials: true
+                }).then(res => {
+                    console.log(res);
+                }).catch(err => console.log(err));
+            }
+
         } else {
             alert('땡!')
         }
@@ -142,7 +169,6 @@ function QuizOne() {
         axios.get(`${API_LIKE_BASE}/quizzes/${id}`, {
             withCredentials: true
         }).then(res => {
-            console.log(res.data);
             setIsLiked(true);
             quiz.likesCnt += 1;
         }).catch(err => {
@@ -154,7 +180,6 @@ function QuizOne() {
         axios.delete(`${API_LIKE_BASE}/quizzes/${id}`, {
             withCredentials: true
         }).then(res => {
-            console.log(res.data);
             setIsLiked(false);
             quiz.likesCnt -= 1;
         }).catch(err => {
@@ -181,8 +206,17 @@ function QuizOne() {
         }
     }
 
+    const DevStatus = () => {
+        return (
+            <div className={`${process.env.REACT_APP_TRUE_ONLY_ON_LOCAL !== "true" && "hidden"}`}>
+                {JSON.stringify(quizUserData)}
+            </div>
+        )
+    }
+
     return (
         <div className="p-3 mx-auto w-[600px]">
+            <DevStatus/>
             <div className="border-2 p-5">
                 <div className=" mb-2 flex justify-between">
                     <div className="text-xs"> Quiz. {id} </div>
