@@ -23,32 +23,27 @@ function App() {
     const isLogin = useRecoilValue(isLoginSelector);
 
     useEffect(() => {
-
-        const cookie = getCookie("Authorization");
-
-        console.log("cookie값 :");
-        console.log(cookie);
-
-        if (cookie === undefined) {
-            localStorage.removeItem('user-info');
-        } else {
-            const storedUserInfo = localStorage.getItem('user-info');
+        const storedUserInfo = sessionStorage.getItem('user-info')
+        if (storedUserInfo !== null) {
+            console.log("Load user-info from Session Storage");
             const parsedUserInfoJson = JSON.parse(storedUserInfo);
             setUserInfo(parsedUserInfoJson);
         }
     }, [])
 
     const DevTools = () => {
+        const isLocal = process.env.REACT_APP_TRUE_ONLY_ON_LOCAL;
+
         return (
             <div
-                className={`space-y-2 text-xs m-2 ${process.env.REACT_APP_TRUE_ONLY_ON_LOCAL === "false" && "hidden"}`}>
-                <div className="border-2 flex space-x-4 w-fit">
-                    <div>쿠키 체크 : {getCookie("Authorization") && "Exist"}</div>
+                className={`space-y-2 text-xs m-2 ${isLocal !== "true" && "hidden"}`}>
+                <div className="border-2 flex space-x-4 w-fit cursor-pointer">
+                    <div onClick={() => {
+                        alert(userInfo);
+                    }}>쿠키 체크 : {getCookie("Authorization") && "Exist"}</div>
                     <div>로그인 상태 : {isLogin ? "On" : "Off"}</div>
                 </div>
                 <div className="border-2">user-info : {JSON.stringify(userInfo)}</div>
-
-
             </div>
         )
     }

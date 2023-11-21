@@ -8,11 +8,11 @@ import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
+    <CookiesProvider>
         <RecoilRoot>
-            <CookiesProvider>
-                <App/>
-            </CookiesProvider>
+            <App/>
         </RecoilRoot>
-    </React.StrictMode>
+    </CookiesProvider>
+    // </React.StrictMode>
 );
