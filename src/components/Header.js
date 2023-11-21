@@ -21,7 +21,7 @@ export default function Header() {
         removeCookie('Refresh-Token');
 
         setUserInfo(undefined);
-        localStorage.removeItem('user-info');
+        sessionStorage.removeItem('user-info');
 
         window.location.href = "/foohaha";
         // navigate('/');
