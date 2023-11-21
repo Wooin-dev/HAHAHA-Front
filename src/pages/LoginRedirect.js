@@ -1,14 +1,13 @@
 import React, {useEffect} from "react";
 import axios from "axios";
-import {useSetRecoilState} from "recoil";
-import {UserInfoAtom} from "../recoil/loginState";
 import {API_USERS_BASE} from "../constants/uri";
+import {useNavigate} from "react-router-dom";
 
 const LoginRedirect = () => {
 
     const code = new URL(window.location.href).searchParams.get("code");
-    const setUserInfo = useSetRecoilState(UserInfoAtom);
 
+    const navigate = useNavigate();
     //인가코드 백으로 보내는 코드
     useEffect(() => {
 
@@ -19,17 +18,15 @@ const LoginRedirect = () => {
             },
             withCredentials: true
         }).then((res) => { //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
-
-            setUserInfo(res.data);
-            console.log("로그인 완료");
-            localStorage.setItem('user-info', JSON.stringify(res.data));
-
-            window.location.href = '/foohaha'
-            }).catch(err => {
-                console.log(`카카오 로그인 Error : ${err}`);
-            });
+            sessionStorage.setItem('user-info', JSON.stringify(res.data));
+            // window.location.href = "/foohaha";
+            navigate("/");
+        }).catch(err => {
+            console.log(`카카오 로그인 Error : ${err}`);
+            alert(err);
+            window.location.href = "/foohaha";
+        });
     }, []);
-
 
     return (
         <div className="flex items-center justify-center h-[80vh]">

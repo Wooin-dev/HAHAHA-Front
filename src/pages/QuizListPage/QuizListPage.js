@@ -36,9 +36,7 @@ export default function QuizListPage() {
     const QuizListSection = () => {
         return (
             <div className="">
-                <div className="
-                space-y-2
-                ">
+                <div className="space-y-2">
                     {
                         quizzes.map((quiz) => {
                             return (
