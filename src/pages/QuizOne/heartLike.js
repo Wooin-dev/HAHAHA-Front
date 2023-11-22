@@ -2,7 +2,7 @@ import React from 'react';
 
 function HeartLike(props) {
 
-    const baseStyle = "transition-colors duration-300 flex justify-center w-24 h-24 mx-auto my-5 rounded-full ";
+    const baseStyle = "transition-colors duration-300 flex justify-center w-24 h-24 mx-auto my-5 rounded-full cursor-pointer";
 
     return (
         <div>

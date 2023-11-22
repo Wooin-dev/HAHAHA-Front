@@ -94,9 +94,11 @@ export default function Header() {
         )
     }
 
-    return (
-        <header
-            className="mb-5 bg-gray-100 shadow text-black min-w-2100 w-full flex justify-between items-center p-2 z-10">
+    const Category = () => {
+
+
+        return (
+
             <div className="flex items-center">
                 <Link className="text-xl font-bold ml-10 whitespace-nowrap flex-shrink-0" to="/">푸하하</Link>
                 <nav className="ml-10 space-x-4 whitespace-nowrap flex-shrink-0">
@@ -104,6 +106,13 @@ export default function Header() {
                     {/*<Link to="/rank" className="hover:text-gray-400">아재왕</Link>*/}
                 </nav>
             </div>
+
+        );
+    }
+
+    return (
+        <header className="mb-5 bg-gray-100 shadow text-black w-full flex justify-between items-center p-2 z-10">
+            <Category/>
             <LoginOutNav/>
             <LoginModalContents show={showModal} handleClose={handleCloseModal}/>
         </header>

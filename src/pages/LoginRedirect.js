@@ -19,8 +19,8 @@ const LoginRedirect = () => {
             withCredentials: true
         }).then((res) => { //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
             sessionStorage.setItem('user-info', JSON.stringify(res.data));
-            // window.location.href = "/foohaha";
-            navigate("/");
+            window.location.href = "/foohaha";
+            // navigate("/");
         }).catch(err => {
             console.log(`카카오 로그인 Error : ${err}`);
             alert(err);
