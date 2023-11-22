@@ -3,24 +3,21 @@ import React, {useEffect, useState} from "react";
 import QuizThumb from "../../components/QuizThumb";
 import axios from "axios";
 import PageBtnRow from "./Components/PageBtnRow";
-import Title from "../../components/Title";
-import UtilBtnLine from "./Components/UtilBtnLine";
-import {API_QUIZ_BASE} from "../../constants/uri";
 
-export default function QuizListPage() {
+export default function QuizListPage(props) {
     const [quizzes, setQuizzes] = useState([]);
     const [startPage, setStartPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호를 상태로 관리합니다.
     const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수입니다. 적절히 조정해야 합니다.
 
     useEffect(() => {
-        axios.get(`${API_QUIZ_BASE}`, {
+        axios.get(props.uri, {
             params: {
                 page: currentPage,
-                size: 10,
-                sortBy: "createdAt",
-                isAsc: false,
-            }
+                size: props.size,
+                sortBy: props.sortBy,
+                isAsc: props.isAsc,
+            }, withCredentials: true
         }).then(res => {
             setQuizzes(res.data.content);
             setTotalPages(res.data.totalPages);
@@ -51,19 +48,15 @@ export default function QuizListPage() {
     }
 
     return (
-        <div>
-            <Title title="유-우머" subtitle="부장님의 입꼬리가 씰룩거리는 이유"/>
-            <div className="w-[650px] m-auto space-y-4">
-                <UtilBtnLine/>
-                <QuizListSection/>
-                <PageBtnRow style="container flex justify-center mx-auto mt-8"
-                            startPage={startPage}
-                            setStartPage={setStartPage}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                            totalPages={totalPages}
-                            onPageChange={handlePageChange}/>
-            </div>
+        <div className="w-[650px] m-auto space-y-4">
+            <QuizListSection/>
+            <PageBtnRow style="container flex justify-center mx-auto mt-8"
+                        startPage={startPage}
+                        setStartPage={setStartPage}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}/>
         </div>
     )
 }
