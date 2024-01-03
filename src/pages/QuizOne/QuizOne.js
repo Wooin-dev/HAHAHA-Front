@@ -44,17 +44,12 @@ function QuizOne() {
         }
 
         if (isLogin) {
-            axios.get(`${API_LIKE_BASE}/quizzes/is-liked/${id}`, {
-                withCredentials: true
-            })
-                .then(res => {
-                    setIsLiked(res.data);
-                });
 
             axios.get(`${API_QUIZ_USER_DATA_BASE}/show-quiz/${id}`, {
                 withCredentials: true
             }).then(res => {
                 setQuizUserData(res.data);
+                setIsLiked(res.data.isLiked);
             })
         }
 
@@ -158,15 +153,15 @@ function QuizOne() {
             if (isLiked) {
                 cancleLike();
             } else {
-                hitLike();
+                doLike();
             }
         } else {
             alert("로그인이 필요한 기능입니다.");
         }
     }
 
-    const hitLike = () => {
-        axios.get(`${API_LIKE_BASE}/quizzes/${id}`, {
+    const doLike = () => {
+        axios.get(`${API_LIKE_BASE}/quizzes/${id}/do-like`, {
             withCredentials: true
         }).then(res => {
             setIsLiked(true);
@@ -177,7 +172,7 @@ function QuizOne() {
     }
 
     const cancleLike = () => {
-        axios.delete(`${API_LIKE_BASE}/quizzes/${id}`, {
+        axios.get(`${API_LIKE_BASE}/quizzes/${id}/cancle-like`, {
             withCredentials: true
         }).then(res => {
             setIsLiked(false);
@@ -210,6 +205,7 @@ function QuizOne() {
         return (
             <div className={`${process.env.REACT_APP_TRUE_ONLY_ON_LOCAL !== "true" && "hidden"}`}>
                 {JSON.stringify(quizUserData)}
+                {isLiked ? "true" : "false"}
             </div>
         )
     }
